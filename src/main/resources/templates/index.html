@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráfico de Contratos </title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Estilos personalizados -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .card {
+            margin-top: 2rem;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .chart-container {
+            padding: 20px;
+        }
+        .navbar {
+            background-color: #083271;
+        }
+        .navbar-brand {
+            color: white !important;
+            font-weight: bold;
+        }
+        .controle-box {
+            background-color: #ffffff; /* Fundo branco */
+            border-radius: 10px; /* Bordas arredondadas */
+            padding: 20px; /* Espaçamento interno */
+            border: 1px solid #cfd8dc; /* Borda sutil */
+            margin: 20px auto; /* Centralizar e adicionar margem */
+            max-width: 600px; /* Largura máxima */
+            text-align: center; /* Centralizar conteúdo */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+        }
+        .controle-box h4 {
+            margin-bottom: 20px; /* Espaçamento abaixo do título */
+            color: #083271; /* Cor do título */
+            font-weight: bold;
+        }
+        .btn-custom {
+            background-color: #083271; /* Cor do botão */
+            border: none;
+            padding: 10px 20px; /* Espaçamento interno */
+            font-size: 16px; /* Tamanho da fonte */
+            border-radius: 5px; /* Bordas arredondadas */
+            color: white; /* Cor do texto */
+            transition: background-color 0.3s ease; /* Transição suave */
+        }
+        .btn-custom:hover {
+            background-color: #0d47a1; /* Cor do botão ao passar o mouse */
+        }
+    </style>
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Dashboard de Contratos (Correspondente Águia)</a>
+    </div>
+</nav>
+
+<!-- Gráfico -->
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Contratos por Mês</h5>
+                    <div class="chart-container">
+                        <canvas id="contratosChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Controle de Contratos -->
+<div class="controle-box">
+    <h4>Controle de Contratos</h4>
+    <div>
+        <a th:href="@{/controle-contratos}" class="btn btn-custom">CONTROLE DE CONTRATOS</a>
+    </div>
+</div>
+
+<script th:inline="javascript">
+    var meses = /*[[${meses}]]*/ [];
+    var totais = /*[[${totais}]]*/ [];
+
+    var ctx = document.getElementById('contratosChart').getContext('2d');
+    var contratosChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: meses,
+            datasets: [{
+                label: 'Número de Contratos',
+                data: totais,
+                backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                },
+                tooltip: {
+                    enabled: true,
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Número de Contratos'
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Mês'
+                    }
+                }
+            }
+        }
+    });
+</script>
+
+<!-- Bootstrap JS (opcional, para funcionalidades como dropdowns) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

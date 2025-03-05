@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: contratos
+  datasource:
+    url: jdbc:postgresql://localhost:5432/Correspondente
+    username: postgres
+    password: 123456
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
