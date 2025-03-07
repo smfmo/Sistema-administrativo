@@ -1,33 +1,28 @@
 package com.samuel.contratos.controller;
 
-import com.samuel.contratos.model.Contrato;
+
 import com.samuel.contratos.repository.ContratosRepository;
-import com.samuel.contratos.service.ContratoService;
 import com.samuel.contratos.service.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Controller
-public class contratosGraficosController {
+public class ContratosGraficosController {
 
     private final ContratosRepository contratosRepository;
-    private final ContratoService contratoService;
 
     @Autowired
-    public contratosGraficosController(ContratosRepository contratosRepository,
-                                       ContratoService contratoService) {
+    public ContratosGraficosController(ContratosRepository contratosRepository) {
         this.contratosRepository = contratosRepository;
-        this.contratoService = contratoService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/inicio")
     public String index(Model model) {
         LocalDate startDate = LocalDate.now().minusMonths(7); // Últimos 6 meses
         LocalDate endDate = LocalDate.now();
@@ -56,17 +51,14 @@ public class contratosGraficosController {
         model.addAttribute("meses", todosMeses);
         model.addAttribute("totais", totais);
 
-        return "index";
+        return "grafico-geral";
     }
 
-    @GetMapping("controle-contratos")
-    public String ExibirTodosContratos(Model model) {
-        List<Contrato> contratos = contratoService.buscarTodosOsContratos();
-
-        model.addAttribute("contratos",
-                contratoService.buscarTodosOsContratos());
-
-        return "controle-contratos";
-    }
-
+/*    @GetMapping("controle-contratos")
+//    public String ExibirTodosContratos(Model model) {
+//        model.addAttribute("contratos",
+//                contratoService.buscarTodosOsContratos());
+//
+//        return "controle-contratos";
+ }*/
 }

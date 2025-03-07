@@ -41,13 +41,11 @@
 <div class="container mt-4">
     <div class="row">
         <!-- Iteração sobre os contratos -->
-        <div th:each="contratos : ${contratos}" class="col-md-6 mb-4">
+        <div th:each="contrato : ${contratos}" class="col-md-6 mb-4">
             <div class="card h-100">
                 <div class="card-body cartao-box text-center">
-                    <!--<h2>ID do contrato: <span th:text="${contratos.id}"></span></h2>-->
-                    <h4>Nome do cliente: <span th:text="${contratos.nome}"></span></h4>
-                    <h4>Data da contratação: <span th:text="${#temporals.format(contratos.data, 'dd/MM/yyyy')}"></span></h4>
-                    <h4>Número do contrato: <span th:text="${contratos.numeroDoContrato}"></span></h4>
+                    <h4>Data da contratação: <span th:text="${#temporals.format(contrato.data, 'dd/MM/yyyy')}"></span></h4>
+                    <h4>Número do contrato: <span th:text="${contrato.numeroDoContrato}"></span></h4>
                 </div>
             </div>
         </div>

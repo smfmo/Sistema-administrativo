@@ -14,4 +14,6 @@ public interface ContratosRepository extends JpaRepository<Contrato, UUID> {
             "WHERE c.data BETWEEN :startDate AND :endDate " +
             "GROUP BY TO_CHAR(c.data, 'YYYY-MM')")
     List<Object[]> countContratosPorMes(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
+
+    List<Contrato> findByClienteId(UUID clienteId);
 }

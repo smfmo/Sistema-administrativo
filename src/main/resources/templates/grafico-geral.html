@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gráfico de Contratos </title>
+    <title>Gráfico de Contratos</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Chart.js -->
@@ -30,31 +30,31 @@
             font-weight: bold;
         }
         .controle-box {
-            background-color: #ffffff; /* Fundo branco */
-            border-radius: 10px; /* Bordas arredondadas */
-            padding: 20px; /* Espaçamento interno */
-            border: 1px solid #cfd8dc; /* Borda sutil */
-            margin: 20px auto; /* Centralizar e adicionar margem */
-            max-width: 600px; /* Largura máxima */
-            text-align: center; /* Centralizar conteúdo */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid #cfd8dc;
+            margin: 20px auto;
+            max-width: 600px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         .controle-box h4 {
-            margin-bottom: 20px; /* Espaçamento abaixo do título */
-            color: #083271; /* Cor do título */
+            margin-bottom: 20px;
+            color: #083271;
             font-weight: bold;
         }
         .btn-custom {
-            background-color: #083271; /* Cor do botão */
+            background-color: #083271;
             border: none;
-            padding: 10px 20px; /* Espaçamento interno */
-            font-size: 16px; /* Tamanho da fonte */
-            border-radius: 5px; /* Bordas arredondadas */
-            color: white; /* Cor do texto */
-            transition: background-color 0.3s ease; /* Transição suave */
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            color: white;
+            transition: background-color 0.3s ease;
         }
         .btn-custom:hover {
-            background-color: #0d47a1; /* Cor do botão ao passar o mouse */
+            background-color: #0d47a1;
         }
     </style>
 </head>
@@ -70,12 +70,10 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title text-center">Contratos por Mês</h5>
-                    <div class="chart-container">
-                        <canvas id="contratosChart"></canvas>
-                    </div>
+            <div class="card shadow-lg p-4">
+                <h2 class="text-center mb-4">Gráfico de Contratos</h2>
+                <div class="chart-container">
+                    <canvas id="contratosChart"></canvas>
                 </div>
             </div>
         </div>
@@ -83,10 +81,26 @@
 </div>
 
 <!-- Controle de Contratos -->
-<div class="controle-box">
-    <h4>Controle de Contratos</h4>
-    <div>
-        <a th:href="@{/controle-contratos}" class="btn btn-custom">CONTROLE DE CONTRATOS</a>
+<div class="container mt4">
+    <div class="row">
+        <div class="controle-box">
+            <h4>Adicionar Cliente</h4>
+            <div>
+                <a th:href="@{/clientes/form/addCliente}" class="btn btn-custom">Clique Aqui</a>
+            </div>
+        </div>
+        <div class="controle-box">
+            <h4>Adicionar novo contrato</h4>
+            <div>
+                <a th:href="@{/contratos/form/addContrato}" class="btn btn-custom">Clique Aqui</a>
+            </div>
+        </div>
+        <div class="controle-box">
+            <h4>Controle de Clientes</h4>
+            <div>
+                <a th:href="@{/clientes/controle/listaClientes}" class="btn btn-custom">Clique Aqui</a>
+            </div>
+        </div>
     </div>
 </div>
 
