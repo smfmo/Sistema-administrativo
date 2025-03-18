@@ -2,6 +2,7 @@ package com.samuel.contratos.service;
 
 import com.samuel.contratos.model.Cliente;
 import com.samuel.contratos.model.Contrato;
+import com.samuel.contratos.model.Endereco;
 import com.samuel.contratos.repository.ClientesRepository;
 import com.samuel.contratos.repository.ContratosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,17 +15,16 @@ public class ClienteService {
 
     private final ClientesRepository clientes;
     private final ContratosRepository contratos;
-    private final ClientesRepository clientesRepository;
 
     @Autowired
     public ClienteService(ClientesRepository clientes,
-                          ContratosRepository contratos, ClientesRepository clientesRepository) {
+                          ContratosRepository contratos) {
         this.clientes = clientes;
         this.contratos = contratos;
-        this.clientesRepository = clientesRepository;
     }
 
-    public void salvarCliente(Cliente cliente) {
+    public void salvarCliente(Cliente cliente, Endereco endereco) {
+        cliente.setEndereco(endereco);
         clientes.save(cliente);
     }
 

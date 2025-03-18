@@ -2,6 +2,7 @@ package com.samuel.contratos.controller;
 
 import com.samuel.contratos.model.Cliente;
 import com.samuel.contratos.model.Contrato;
+import com.samuel.contratos.model.Endereco;
 import com.samuel.contratos.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,12 +25,14 @@ public class ClientesController {
     @GetMapping("/form/addCliente") //mostrar o formulario do cliente
     public String mostrarFormulario(Model model) {
         model.addAttribute("clientes", new Cliente());
+        model.addAttribute("endereco", new Endereco());
         return "formulario-cliente";
     }
 
     @PostMapping
-    public String salvarCliente(@ModelAttribute Cliente cliente) {
-        clienteService.salvarCliente(cliente);
+    public String salvarCliente(@ModelAttribute Cliente cliente,
+                                @ModelAttribute Endereco endereco) {
+        clienteService.salvarCliente(cliente, endereco);
         return "redirect:/inicio";
     }
 
