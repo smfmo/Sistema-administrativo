@@ -29,4 +29,9 @@ public class ContratoService {
     public List<Contrato> listarContratosPorCliente(UUID id) {
         return contratosRepository.findByClienteId(id);
     }
+
+    public Contrato informacoesContrato(UUID id) {
+        return contratosRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Contrato não encontrado"));
+    }
 }

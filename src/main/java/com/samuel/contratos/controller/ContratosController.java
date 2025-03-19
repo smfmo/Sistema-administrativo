@@ -79,4 +79,11 @@ public class ContratosController {
 
         return "controle-contratos";
     }
+    @GetMapping("/{id}")
+    public String informacoesContrato(@PathVariable UUID id,
+                                      Model model) {
+        Contrato contrato = contratosService.informacoesContrato(id);
+        model.addAttribute("contrato", contrato);
+        return "info-contratos" ;
+    }
 }
