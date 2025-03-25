@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.UUID;
 
 
 @Controller
@@ -76,6 +77,19 @@ public class ClientesController {
             clientes = clienteService.pesquisarCliente("");
         }
         model.addAttribute("clientes", clientes);
+        return "Controle-de-clientes";
+    }
+
+    @GetMapping("{id}")
+    public String mostrarInformacoes(@PathVariable UUID id,
+                                     Model model) {
+       Cliente cliente = clienteService.informacoesCliente(id);
+       model.addAttribute("cliente", cliente);
+       return "informacoes-cliente";
+    }
+
+    @GetMapping("/clientes")
+    public String voltar() {
         return "Controle-de-clientes";
     }
 }

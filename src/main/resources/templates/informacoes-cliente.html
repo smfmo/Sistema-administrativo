@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informações do Cliente</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .info-section {
+            padding: 20px;
+        }
+        .navbar {
+            background-color: #083271;
+        }
+        .navbar-brand {
+            color: white !important;
+            font-weight: bold;
+        }
+        .btn-custom {
+            background-color: #083271;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        .btn-custom:hover {
+            background-color: #0d47a1;
+        }
+        .info-card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid #cfd8dc;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        .info-label {
+            font-weight: 600;
+            color: #083271;
+        }
+        .info-value {
+            margin-bottom: 10px;
+        }
+        .section-title {
+            color: #083271;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #083271;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Informações do Cliente</a>
+        <div>
+            <a href="#" class="btn btn-custom me-2">Editar</a>
+            <a th:href="@{/clientes}" class="btn btn-outline-light">Voltar</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <!-- Cabeçalho do Cliente -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <div class="row align-items-center">
+                <div class="col-md-2 text-center">
+                    <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center" style="width: 100px; height: 100px; margin: 0 auto;">
+                        <span class="text-white fs-3" th:text="${#strings.substring(cliente.nome, 0, 1)}"></span>
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <h2 th:text="${cliente.nome}"></h2>
+                    <p class="text-muted mb-1" th:text="'ID: ' + ${cliente.id}"></p>
+                    <!--<p class="text-muted" th:text="'Cadastrado em: ' + ${#temporals.format(cliente.dataCadastro, 'dd/MM/yyyy')}"></p>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Coluna de Informações Básicas -->
+        <div class="col-md-6">
+            <div class="info-section">
+                <h3 class="section-title">Dados Pessoais</h3>
+
+                <div class="info-card">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="info-value">
+                                <span class="info-label">Nome Completo:</span>
+                                <p th:text="${cliente.nome}"></p>
+                            </div>
+                            <div class="info-value">
+                                <span class="info-label">CPF:</span>
+                                <p th:text="${cliente.cpf}"></p>
+                            </div>
+                            <div class="info-value">
+                                <span class="info-label">RG:</span>
+                                <p th:text="${cliente.numeroIdentidade}"></p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info-value">
+                                <span class="info-label">Data de Nascimento:</span>
+                                <p th:text="${#temporals.format(cliente.dataNascimento, 'dd/MM/yyyy')}"></p>
+                            </div>
+                            <!--<div class="info-value">
+                                <span class="info-label">Sexo:</span>
+                                <p th:text="${cliente.sexo}"></p>
+                            </div>-->
+                            <div class="info-value">
+                                <span class="info-label">Estado Civil:</span>
+                                <p th:text="${cliente.estadoCivil}"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Espaço para adicionar outros campos pessoais -->
+                </div>
+
+                <h3 class="section-title mt-4">Contatos</h3>
+                <div class="info-card">
+                    <div class="info-value">
+                        <span class="info-label">E-mail:</span>
+                        <p th:text="${cliente.email}"></p>
+                    </div>
+                    <div class="info-value">
+                        <span class="info-label">Telefone:</span>
+                        <p th:text="${cliente.telefone}"></p>
+                    </div>
+                    <!--<div class="info-value">
+                        <span class="info-label">Celular:</span>
+                        <p th:text="${cliente.celular}"></p>
+                    </div>-->
+                    <!-- Espaço para adicionar outros campos de contato -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Coluna de Informações Adicionais -->
+        <div class="col-md-6">
+            <div class="info-section">
+                <h3 class="section-title">Endereço</h3>
+                <div class="info-card">
+                    <div class="info-value">
+                        <span class="info-label">CEP:</span>
+                        <p th:text="${cliente.endereco.cep}"></p>
+                    </div>
+                    <div class="info-value">
+                        <span class="info-label">Logradouro:</span>
+                        <p th:text="${cliente.endereco.logradouro}"></p>
+                    </div>
+                    <div class="info-value">
+                        <span class="info-label">Número:</span>
+                        <p th:text="${cliente.endereco.numero}"></p>
+                    </div>
+                    <div class="info-value">
+                        <span class="info-label">Complemento:</span>
+                        <p th:text="${cliente.endereco.complemento} ?: 'Não informado'"></p>
+                    </div>
+                    <div class="info-value">
+                        <span class="info-label">Bairro:</span>
+                        <p th:text="${cliente.endereco.bairro}"></p>
+                    </div>
+                    <div class="info-value">
+                        <span class="info-label">Cidade/UF:</span>
+                        <p th:text="${cliente.endereco.uf}"></p>
+                    </div>
+                    <!-- Espaço para adicionar outros campos de endereço -->
+                </div>
+
+               <!--<h3 class="section-title mt-4">Informações Adicionais</h3>
+                <div class="info-card">
+                    <div class="info-value">
+                        <span class="info-label">Profissão:</span>
+                        <p th:text="${cliente.profissao} ?: 'Não informado'"></p>
+                    </div>
+                    <div class="info-value">
+                        <span class="info-label">Empresa:</span>
+                        <p th:text="${cliente.empresa} ?: 'Não informado'"></p>
+                    </div>
+                    <div class="info-value">
+                        <span class="info-label">Renda Mensal:</span>
+                        <p th:text="${cliente.rendaMensal != null} ? 'R$ ' + ${#numbers.formatDecimal(cliente.rendaMensal, 1, 2, 'POINT')} : 'Não informado'"></p>
+                    </div>-->
+                    <!-- Espaço para adicionar outros campos adicionais -->
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

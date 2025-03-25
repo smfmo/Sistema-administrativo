@@ -49,4 +49,9 @@ public class ClienteService {
     public List<Cliente> pesquisarCliente(String nome) {
         return clientes.findByNomeContainingIgnoreCase(nome);
     }
+
+    public Cliente informacoesCliente(UUID id) {
+        return clientes.findById(id)
+                .orElseThrow(()-> new RuntimeException("cliente nao encontrado"));
+    }
 }
