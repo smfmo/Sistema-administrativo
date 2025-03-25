@@ -15,12 +15,14 @@ public class ClienteService {
 
     private final ClientesRepository clientes;
     private final ContratosRepository contratos;
+    private final ClientesRepository clientesRepository;
 
     @Autowired
     public ClienteService(ClientesRepository clientes,
-                          ContratosRepository contratos) {
+                          ContratosRepository contratos, ClientesRepository clientesRepository) {
         this.clientes = clientes;
         this.contratos = contratos;
+        this.clientesRepository = clientesRepository;
     }
 
     public void salvarCliente(Cliente cliente, Endereco endereco) {
@@ -41,5 +43,10 @@ public class ClienteService {
     }
     public List<Contrato> listarContratosPorCliente(UUID clienteId) {
         return contratos.findByClienteId(clienteId);
+    }
+
+    //pesquisar o cliente
+    public List<Cliente> pesquisarCliente(String nome) {
+        return clientes.findByNomeContainingIgnoreCase(nome);
     }
 }

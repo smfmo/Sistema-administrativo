@@ -64,4 +64,18 @@ public class ClientesController {
 //        return "Cliente atualizado com sucesso!";
  }*/
 
+    @GetMapping
+    public String pesquisarCliente(@RequestParam(name = "nome",
+            required = false) String nome,
+                                   Model model) {
+
+        List<Cliente> clientes;
+        if (nome != null && !nome.isEmpty()) {
+            clientes = clienteService.pesquisarCliente(nome);
+        } else {
+            clientes = clienteService.pesquisarCliente("");
+        }
+        model.addAttribute("clientes", clientes);
+        return "Controle-de-clientes";
+    }
 }
