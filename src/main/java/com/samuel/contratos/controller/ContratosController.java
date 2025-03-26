@@ -3,7 +3,6 @@ package com.samuel.contratos.controller;
 
 import com.samuel.contratos.model.Contrato;
 import com.samuel.contratos.model.TiposDeContrato;
-import com.samuel.contratos.repository.ContratosRepository;
 import com.samuel.contratos.service.ClienteService;
 import com.samuel.contratos.service.ContratoService;
 import com.samuel.contratos.service.DateUtils;
@@ -84,6 +83,7 @@ public class ContratosController {
                                       Model model) {
         Contrato contrato = contratosService.informacoesContrato(id);
         model.addAttribute("contrato", contrato);
-        return "info-contratos" ;
+        return "informacoes-contratos";
     }
+
 }
