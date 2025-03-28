@@ -72,7 +72,6 @@
 </nav>
 
 <div class="container mt-4">
-    <!-- Cabeçalho do Cliente -->
     <div class="card mb-4">
         <div class="card-body">
             <div class="row align-items-center">
@@ -84,14 +83,12 @@
                 <div class="col-md-10">
                     <h2 th:text="${cliente.nome}"></h2>
                     <p class="text-muted mb-1" th:text="'ID: ' + ${cliente.id}"></p>
-                    <!--<p class="text-muted" th:text="'Cadastrado em: ' + ${#temporals.format(cliente.dataCadastro, 'dd/MM/yyyy')}"></p>-->
                 </div>
             </div>
         </div>
     </div>
 
     <div class="row">
-        <!-- Coluna de Informações Básicas -->
         <div class="col-md-6">
             <div class="info-section">
                 <h3 class="section-title">Dados Pessoais</h3>
@@ -135,16 +132,9 @@
                         <span class="info-label">Telefone:</span>
                         <p th:text="${cliente.telefone}"></p>
                     </div>
-                    <!--<div class="info-value">
-                        <span class="info-label">Celular:</span>
-                        <p th:text="${cliente.celular}"></p>
-                    </div>-->
-                    <!-- Espaço para adicionar outros campos de contato -->
                 </div>
             </div>
         </div>
-
-        <!-- Coluna de Informações Adicionais -->
         <div class="col-md-6">
             <div class="info-section">
                 <h3 class="section-title">Endereço</h3>
@@ -173,7 +163,7 @@
                         <span class="info-label">Cidade/UF:</span>
                         <p th:text="${cliente.endereco.uf}"></p>
                     </div>
-                    <!-- Espaço para adicionar outros campos de endereço -->
+
                 </div>
 
                <!--<h3 class="section-title mt-4">Informações Adicionais</h3>

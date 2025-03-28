@@ -115,10 +115,18 @@
             },
             scales: {
                 y: {
-                    beginAtZero: true,
+                    beginAtZero: true ,
                     title: {
                         display: true,
                         text: 'Número de Contratos'
+                    },
+                    ticks: {
+                        stepSize: 1,
+                        callback: function (value) {
+                            if (value % 1 === 0 ){
+                                return value
+                            }
+                        }
                     }
                 },
                 x: {

@@ -48,7 +48,7 @@ public class ContratosController {
     public String contratosPorCliente(@PathVariable UUID id,
                                       Model model) {
 
-        LocalDate startDate = LocalDate.now().minusMonths(7); // Últimos 6 meses
+        LocalDate startDate = LocalDate.now().minusMonths(12); // Contratos dos últimos 12 meses
         LocalDate endDate = LocalDate.now();
 
         // Gerar todos os meses no intervalo
