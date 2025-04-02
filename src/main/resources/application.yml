@@ -2,9 +2,9 @@ spring:
   application:
     name: contratos
   datasource:
-    url: jdbc:postgresql://localhost:5432/Correspondente
+    url: jdbc:postgresql://localhost:5433/correspondentedb
     username: postgres
-    password: 123456
+    password: postgres
   jpa:
     hibernate:
       ddl-auto: update
