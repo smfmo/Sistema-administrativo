@@ -3,7 +3,7 @@ package com.samuel.contratos.controller;
 
 import com.samuel.contratos.repository.ContratosRepository;
 import com.samuel.contratos.service.DateUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,14 +13,10 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
+@RequiredArgsConstructor
 public class ContratosGraficosController {
 
     private final ContratosRepository contratosRepository;
-
-    @Autowired
-    public ContratosGraficosController(ContratosRepository contratosRepository) {
-        this.contratosRepository = contratosRepository;
-    }
 
     @GetMapping("/inicio")
     public String index(Model model) {

@@ -6,7 +6,7 @@ import com.samuel.contratos.model.TiposDeContrato;
 import com.samuel.contratos.service.ClienteService;
 import com.samuel.contratos.service.ContratoService;
 import com.samuel.contratos.service.DateUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,17 +19,11 @@ import java.util.UUID;
 
 @Controller
 @RequestMapping("/contratos")
+@RequiredArgsConstructor
 public class ContratosController {
 
     private final ContratoService contratosService;
     private final ClienteService clienteService;
-
-    @Autowired
-    public ContratosController(ContratoService contratosService,
-                               ClienteService clienteService) {
-        this.clienteService = clienteService;
-        this.contratosService = contratosService;
-    }
 
     @GetMapping("/form/addContrato")
     public String mostrarFormularioContrato(Model model) {

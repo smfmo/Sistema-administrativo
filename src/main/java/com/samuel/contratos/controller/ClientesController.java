@@ -4,7 +4,7 @@ import com.samuel.contratos.model.Cliente;
 import com.samuel.contratos.model.Contrato;
 import com.samuel.contratos.model.Endereco;
 import com.samuel.contratos.service.ClienteService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,14 +14,10 @@ import java.util.UUID;
 
 @Controller
 @RequestMapping("/clientes")
+@RequiredArgsConstructor
 public class ClientesController {
 
     private final ClienteService clienteService;
-
-    @Autowired
-    public ClientesController(ClienteService clienteService) {
-        this.clienteService = clienteService;
-    }
 
     @GetMapping("/form/addCliente") //mostrar o formulario do cliente
     public String mostrarFormulario(Model model) {
