@@ -1,4 +1,4 @@
-package com.samuel.contratos.dtos;
+package com.samuel.contratos.controller.dtos;
 
 import com.samuel.contratos.model.Cliente;
 import com.samuel.contratos.model.Contrato;
