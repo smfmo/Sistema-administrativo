@@ -1,5 +1,6 @@
 package com.samuel.contratos.controller;
 
+import com.samuel.contratos.controller.dtos.ClienteDto;
 import com.samuel.contratos.model.Cliente;
 import com.samuel.contratos.model.Contrato;
 import com.samuel.contratos.model.Endereco;
@@ -20,16 +21,29 @@ public class ClientesController {
     private final ClienteService clienteService;
 
     @GetMapping("/form/addCliente") //mostrar o formulario do cliente
-    public String mostrarFormulario(Model model) {
-        model.addAttribute("clientes", new Cliente());
-        model.addAttribute("endereco", new Endereco());
+    public String mostrarFormulario(@ModelAttribute ClienteDto clienteDto ,Model model) {
+        model.addAttribute("clientes",
+                new ClienteDto(
+                clienteDto.nome(),
+                clienteDto.telefone(),
+                clienteDto.dataNascimento(),
+                clienteDto.cpf(),
+                clienteDto.matricula(),
+                clienteDto.numeroIdentidade(),
+                clienteDto.orgaoEmissor(),
+                clienteDto.estadoCivil(),
+                clienteDto.email(),
+                clienteDto.endereco()));
+
+        //model.addAttribute("endereco", new Endereco());
         return "formulario-cliente";
     }
 
     @PostMapping
-    public String salvarCliente(@ModelAttribute Cliente cliente,
-                                @ModelAttribute Endereco endereco) {
-        clienteService.salvarCliente(cliente, endereco);
+    public String salvarCliente(@ModelAttribute ClienteDto clienteDto) {
+        //Cliente cliente = clienteDto.mapearParaCliente();
+        clienteService.salvarCliente(clienteDto);
+
         return "redirect:/inicio";
     }
 

@@ -1,5 +1,6 @@
 package com.samuel.contratos.service;
 
+import com.samuel.contratos.controller.dtos.ClienteDto;
 import com.samuel.contratos.model.Cliente;
 import com.samuel.contratos.model.Contrato;
 import com.samuel.contratos.model.Endereco;
@@ -17,8 +18,8 @@ public class ClienteService {
     private final ClientesRepository clientes;
     private final ContratosRepository contratos;
 
-    public void salvarCliente(Cliente cliente, Endereco endereco) {
-        cliente.setEndereco(endereco);
+    public void salvarCliente(ClienteDto clienteDto) {
+        Cliente cliente = clienteDto.mapearParaCliente();
         clientes.save(cliente);
     }
 

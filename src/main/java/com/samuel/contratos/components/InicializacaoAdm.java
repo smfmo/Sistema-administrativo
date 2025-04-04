@@ -12,6 +12,6 @@ public class InicializacaoAdm implements CommandLineRunner {
     private final UserAdmService userAdmService;
 
     public void run(String... args) {
-        userAdmService.criarUsuarioAdmin("patricia", "patricia");
+        userAdmService.criarUsuarioAdmin("usuarioTeste", "patricia");
     }
 }
