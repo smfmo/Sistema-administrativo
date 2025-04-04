@@ -10,5 +10,5 @@ public interface ClientesRepository extends JpaRepository<Cliente, UUID> {
 
     List<Cliente> findByNomeContainingIgnoreCase(String nome);
 
-    String nome(String nome);
+    //String nome(String nome);
 }

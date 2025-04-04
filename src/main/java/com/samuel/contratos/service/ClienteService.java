@@ -7,6 +7,8 @@ import com.samuel.contratos.model.Endereco;
 import com.samuel.contratos.repository.ClientesRepository;
 import com.samuel.contratos.repository.ContratosRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.UUID;

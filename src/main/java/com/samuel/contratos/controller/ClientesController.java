@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -80,14 +82,10 @@ public class ClientesController {
     public String pesquisarCliente(@RequestParam(name = "nome",
             required = false) String nome,Model model) {
 
-        List<Cliente> clientes;
+        List<Cliente> resultado = clienteService.pesquisarCliente(nome);
 
-        if (nome != null && !nome.isEmpty()) {
-            clientes = clienteService.pesquisarCliente(nome);
-        } else {
-            clientes = clienteService.pesquisarCliente(""); //busca todos se a pesquisa for vazia
-        }
-        model.addAttribute("clientes", clientes);
+        model.addAttribute("clientes", resultado);
+
         return "Controle-de-clientes";
     }
 
