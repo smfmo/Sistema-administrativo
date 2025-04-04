@@ -21,7 +21,10 @@ public class ClientesController {
     private final ClienteService clienteService;
 
     @GetMapping("/form/addCliente") //mostrar o formulario do cliente
-    public String mostrarFormulario(@ModelAttribute ClienteDto clienteDto ,Model model) {
+    public String mostrarFormulario(
+            @ModelAttribute ClienteDto clienteDto,
+            Model model) {
+
         model.addAttribute("clientes",
                 new ClienteDto(
                 clienteDto.nome(),
@@ -33,17 +36,15 @@ public class ClientesController {
                 clienteDto.orgaoEmissor(),
                 clienteDto.estadoCivil(),
                 clienteDto.email(),
-                clienteDto.endereco()));
+                clienteDto.endereco())
+        );
 
-        //model.addAttribute("endereco", new Endereco());
         return "formulario-cliente";
     }
 
     @PostMapping
     public String salvarCliente(@ModelAttribute ClienteDto clienteDto) {
-        //Cliente cliente = clienteDto.mapearParaCliente();
         clienteService.salvarCliente(clienteDto);
-
         return "redirect:/inicio";
     }
 
@@ -77,14 +78,14 @@ public class ClientesController {
 
     @GetMapping
     public String pesquisarCliente(@RequestParam(name = "nome",
-            required = false) String nome,
-                                   Model model) {
+            required = false) String nome,Model model) {
 
         List<Cliente> clientes;
+
         if (nome != null && !nome.isEmpty()) {
             clientes = clienteService.pesquisarCliente(nome);
         } else {
-            clientes = clienteService.pesquisarCliente("");
+            clientes = clienteService.pesquisarCliente(""); //busca todos se a pesquisa for vazia
         }
         model.addAttribute("clientes", clientes);
         return "Controle-de-clientes";

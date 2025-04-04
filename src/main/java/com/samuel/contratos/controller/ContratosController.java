@@ -1,6 +1,6 @@
 package com.samuel.contratos.controller;
 
-
+import com.samuel.contratos.controller.dtos.ContratoDto;
 import com.samuel.contratos.model.Contrato;
 import com.samuel.contratos.model.TiposDeContrato;
 import com.samuel.contratos.service.ClienteService;
@@ -26,15 +26,32 @@ public class ContratosController {
     private final ClienteService clienteService;
 
     @GetMapping("/form/addContrato")
-    public String mostrarFormularioContrato(Model model) {
-        model.addAttribute("contrato", new Contrato());
+    public String mostrarFormularioContrato(@ModelAttribute ContratoDto contratoDto,
+                                            Model model) {
+        model.addAttribute("contratoDto",
+                new ContratoDto(
+                contratoDto.agencia(),
+                contratoDto.sr(),
+                contratoDto.valorBruto(),
+                contratoDto.valorLiquido(),
+                contratoDto.prestacao(),
+                contratoDto.parcelas(),
+                contratoDto.prestamista(),
+                contratoDto.iof(),
+                contratoDto.jurosAcerto(),
+                contratoDto.data(),
+                contratoDto.clienteId(),
+                contratoDto.tiposDeContrato(),
+                contratoDto.numeroDoContrato())
+        );
+
         model.addAttribute("clientes", clienteService.listarClientes());
         model.addAttribute("tiposDeContrato", TiposDeContrato.values());
         return "formulario-contrato";
     }
     @PostMapping
-    public String salvarContrato(@ModelAttribute Contrato contrato) {
-        contratosService.salvarContrato(contrato);
+    public String salvarContrato(@ModelAttribute ContratoDto contratoDto) {
+        contratosService.salvarContrato(contratoDto);
         return "redirect:/inicio";
     }
 

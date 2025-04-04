@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 public record ContratoDto(
-        String Agencia,
+        String agencia,
         String sr,
         String valorBruto,
         String valorLiquido,
@@ -24,7 +24,7 @@ public record ContratoDto(
 
     public Contrato mapearParaContrato(Cliente cliente) {
         Contrato contrato = new Contrato();
-        contrato.setAgencia(Agencia);
+        contrato.setAgencia(agencia);
         contrato.setSr(sr);
         contrato.setValorBruto(valorBruto);
         contrato.setValorLiquido(valorLiquido);
