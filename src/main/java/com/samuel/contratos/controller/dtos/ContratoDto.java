@@ -22,22 +22,4 @@ public record ContratoDto(
         TiposDeContrato tiposDeContrato,
         String numeroDoContrato) {
 
-    public Contrato mapearParaContrato(Cliente cliente) {
-        Contrato contrato = new Contrato();
-        contrato.setAgencia(agencia);
-        contrato.setSr(sr);
-        contrato.setValorBruto(valorBruto);
-        contrato.setValorLiquido(valorLiquido);
-        contrato.setPrestacao(prestacao);
-        contrato.setParcelas(parcelas);
-        contrato.setPrestamista(prestamista);
-        contrato.setIof(iof);
-        contrato.setJurosAcerto(jurosAcerto);
-        contrato.setData(data);
-        contrato.setCliente(cliente);
-        contrato.setTipoContrato(tiposDeContrato);
-        contrato.setNumeroDoContrato(numeroDoContrato);
-
-        return contrato;
-    }
 }

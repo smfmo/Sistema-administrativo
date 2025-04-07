@@ -1,9 +1,8 @@
 package com.samuel.contratos.service;
 
 import com.samuel.contratos.controller.dtos.ContratoDto;
-import com.samuel.contratos.model.Cliente;
+import com.samuel.contratos.controller.mappers.ContratoMapper;
 import com.samuel.contratos.model.Contrato;
-import com.samuel.contratos.repository.ClientesRepository;
 import com.samuel.contratos.repository.ContratosRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,15 +14,11 @@ import java.util.UUID;
 public class ContratoService {
 
     private final ContratosRepository contratosRepository;
-    private final ClientesRepository clientesRepository;
+    private final ContratoMapper contratoMapper;
 
     public void salvarContrato(ContratoDto contratoDto) {
 
-        Cliente cliente = clientesRepository.findById(contratoDto.clienteId())
-                .orElseThrow(() -> new RuntimeException("Cliente não encontrado")
-        );
-
-        Contrato contrato = contratoDto.mapearParaContrato(cliente);
+        Contrato contrato = contratoMapper.toEntity(contratoDto);
 
         contratosRepository.save(contrato);
     }

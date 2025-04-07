@@ -1,6 +1,7 @@
 package com.samuel.contratos.controller;
 
 import com.samuel.contratos.controller.dtos.ContratoDto;
+import com.samuel.contratos.controller.mappers.ContratoMapper;
 import com.samuel.contratos.model.Contrato;
 import com.samuel.contratos.model.TiposDeContrato;
 import com.samuel.contratos.service.ClienteService;
@@ -24,25 +25,13 @@ public class ContratosController {
 
     private final ContratoService contratosService;
     private final ClienteService clienteService;
+    private final ContratoMapper contratoMapper;
 
     @GetMapping("/form/addContrato")
     public String mostrarFormularioContrato(@ModelAttribute ContratoDto contratoDto,
                                             Model model) {
         model.addAttribute("contratoDto",
-                new ContratoDto(
-                contratoDto.agencia(),
-                contratoDto.sr(),
-                contratoDto.valorBruto(),
-                contratoDto.valorLiquido(),
-                contratoDto.prestacao(),
-                contratoDto.parcelas(),
-                contratoDto.prestamista(),
-                contratoDto.iof(),
-                contratoDto.jurosAcerto(),
-                contratoDto.data(),
-                contratoDto.clienteId(),
-                contratoDto.tiposDeContrato(),
-                contratoDto.numeroDoContrato())
+                contratoMapper.toEntity(contratoDto)
         );
 
         model.addAttribute("clientes", clienteService.listarClientes());
