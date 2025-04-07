@@ -1,14 +1,12 @@
 package com.samuel.contratos.service;
 
 import com.samuel.contratos.controller.dtos.ClienteDto;
+import com.samuel.contratos.controller.mappers.ClienteMapper;
 import com.samuel.contratos.model.Cliente;
 import com.samuel.contratos.model.Contrato;
-import com.samuel.contratos.model.Endereco;
 import com.samuel.contratos.repository.ClientesRepository;
 import com.samuel.contratos.repository.ContratosRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.UUID;
@@ -19,9 +17,10 @@ public class ClienteService {
 
     private final ClientesRepository clientes;
     private final ContratosRepository contratos;
+    private final ClienteMapper clienteMapper;
 
     public void salvarCliente(ClienteDto clienteDto) {
-        Cliente cliente = clienteDto.mapearParaCliente();
+        Cliente cliente = clienteMapper.toEntity(clienteDto);
         clientes.save(cliente);
     }
 

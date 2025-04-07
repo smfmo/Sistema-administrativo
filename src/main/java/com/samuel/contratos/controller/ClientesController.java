@@ -1,16 +1,14 @@
 package com.samuel.contratos.controller;
 
 import com.samuel.contratos.controller.dtos.ClienteDto;
+import com.samuel.contratos.controller.mappers.ClienteMapper;
 import com.samuel.contratos.model.Cliente;
 import com.samuel.contratos.model.Contrato;
-import com.samuel.contratos.model.Endereco;
 import com.samuel.contratos.service.ClienteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,6 +19,7 @@ import java.util.UUID;
 public class ClientesController {
 
     private final ClienteService clienteService;
+    private final ClienteMapper clienteMapper;
 
     @GetMapping("/form/addCliente") //mostrar o formulario do cliente
     public String mostrarFormulario(
@@ -28,17 +27,7 @@ public class ClientesController {
             Model model) {
 
         model.addAttribute("clientes",
-                new ClienteDto(
-                clienteDto.nome(),
-                clienteDto.telefone(),
-                clienteDto.dataNascimento(),
-                clienteDto.cpf(),
-                clienteDto.matricula(),
-                clienteDto.numeroIdentidade(),
-                clienteDto.orgaoEmissor(),
-                clienteDto.estadoCivil(),
-                clienteDto.email(),
-                clienteDto.endereco())
+                clienteMapper.toEntity(clienteDto)
         );
 
         return "formulario-cliente";
