@@ -1,7 +1,5 @@
 package com.samuel.contratos.controller.dtos;
 
-import com.samuel.contratos.model.Cliente;
-import com.samuel.contratos.model.Contrato;
 import com.samuel.contratos.model.TiposDeContrato;
 
 import java.time.LocalDate;

@@ -70,8 +70,6 @@ public class Contrato {
     @Column(name = "numero_do_contrato")
     private String numeroDoContrato;
 
-
-
     public Contrato(LocalDate data,
                     String numeroDoContrato,
                     Cliente cliente) {
