@@ -21,7 +21,7 @@ public class Cliente {
 
     @Column(name = "telefone",
             unique = true,
-            length = 9,
+            length = 50,
             nullable = false)
     private String telefone;
 

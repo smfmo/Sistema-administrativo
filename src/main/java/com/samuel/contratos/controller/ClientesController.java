@@ -5,9 +5,11 @@ import com.samuel.contratos.controller.mappers.ClienteMapper;
 import com.samuel.contratos.model.Cliente;
 import com.samuel.contratos.model.Contrato;
 import com.samuel.contratos.service.ClienteService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
@@ -26,15 +28,19 @@ public class ClientesController {
             @ModelAttribute ClienteDto clienteDto,
             Model model) {
 
-        model.addAttribute("clientes",
-                clienteMapper.toEntity(clienteDto)
-        );
+        model.addAttribute("clienteDto", clienteMapper.toEntity(clienteDto));
 
         return "formulario-cliente";
     }
 
     @PostMapping
-    public String salvarCliente(@ModelAttribute ClienteDto clienteDto) {
+    public String salvarCliente(@ModelAttribute("clienteDto") @Valid ClienteDto clienteDto,
+                                BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) { //se houver erros no formulário, volta para o mesmo
+            return "formulario-cliente";
+        }
+
         clienteService.salvarCliente(clienteDto);
         return "redirect:/inicio";
     }
