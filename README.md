@@ -3,11 +3,33 @@
 Este projeto é um **Dashboard de Contratos** desenvolvido com **Spring Boot** e **Thymeleaf**. Ele permite visualizar a quantidade de contratos por mês em um gráfico de barras e acessar uma página de controle de contratos, onde é possível listar todos os contratos cadastrados.
 
 ---
-## Imagem do Dashboard:
-![img.png](img.png)
+## Evidências visuais:
 
-## Imagem do controle: 
-![img_1.png](img_1.png)
+### Login:
+![img.png](login.png)
+
+### Dashboard geral: 
+![img_1.png](dashboradGeral.png)
+
+### cadastro de cliente:
+![img_1.png](cadastroCliente.png)
+![img_1.png](cadastroCliente2.png)
+
+### cadastro de contratos:
+![img_1.png](cadastroContrato.png)
+
+### controle de cliente:
+![img_1.png](controle.png)
+
+### detalhes do cliente:
+![img_1.png](detalhesCliente.png)
+
+### controle de cada contrato:
+- Dashboard de contratos para cada cliente com seus respectivos contratos:
+![img_1.png](detalhesContrato1.png)
+- informações do contrato para cada contrato selecionado:
+  ![img_1.png](detalhesContrato2.png)
+
 
 ---
 
