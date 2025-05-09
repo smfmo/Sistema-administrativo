@@ -6,29 +6,31 @@ Este projeto é um **Dashboard de Contratos** desenvolvido com **Spring Boot** e
 ## Evidências visuais:
 
 ### Login:
-![img.png](login.png)
+![img.png](VisualEvidency/login.png)
 
 ### Dashboard geral: 
-![img_1.png](dashboradGeral.png)
+![img_1.png](VisualEvidency/dashboradGeral.png)
 
 ### cadastro de cliente:
-![img_1.png](cadastroCliente.png)
-![img_1.png](cadastroCliente2.png)
+![img_1.png](VisualEvidency/cadastroCliente.png)
+![img_1.png](VisualEvidency/cadastroCliente2.png)
 
 ### cadastro de contratos:
-![img_1.png](cadastroContrato.png)
+![img_1.png](VisualEvidency/cadastroContrato.png)
 
 ### controle de cliente:
-![img_1.png](controle.png)
+![img_1.png](VisualEvidency/controle.png)
 
 ### detalhes do cliente:
-![img_1.png](detalhesCliente.png)
+![img_1.png](VisualEvidency/detalhesCliente.png)
 
 ### controle de cada contrato:
 - Dashboard de contratos para cada cliente com seus respectivos contratos:
-![img_1.png](detalhesContrato1.png)
+![img_1.png](VisualEvidency/detalhesContrato1.png)
 - informações do contrato para cada contrato selecionado:
-  ![img_1.png](detalhesContrato2.png)
+  ![img_1.png](VisualEvidency/detalhesContrato2.png)
+- vizualização de Pdf do contrato
+  ![img_1.png](VisualEvidency/pdf.png)
 
 
 ---
