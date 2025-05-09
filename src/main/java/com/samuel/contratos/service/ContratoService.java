@@ -16,9 +16,7 @@ public class ContratoService {
     private final ContratosRepository contratosRepository;
     private final ContratoMapper contratoMapper;
 
-    public void salvarContrato(ContratoDto contratoDto) {
-
-        Contrato contrato = contratoMapper.toEntity(contratoDto);
+    public void salvarContrato(Contrato contrato) {
 
         contratosRepository.save(contrato);
     }

@@ -28,19 +28,17 @@ public class ContratosController {
     private final ContratoMapper contratoMapper;
 
     @GetMapping("/form/addContrato")
-    public String mostrarFormularioContrato(@ModelAttribute ContratoDto contratoDto,
+    public String mostrarFormularioContrato(@ModelAttribute Contrato contrato,
                                             Model model) {
-        model.addAttribute("contratoDto",
-                contratoMapper.toEntity(contratoDto)
-        );
+        model.addAttribute("contrato", contrato);
 
         model.addAttribute("clientes", clienteService.listarClientes());
         model.addAttribute("tiposDeContrato", TiposDeContrato.values());
         return "formulario-contrato";
     }
     @PostMapping
-    public String salvarContrato(@ModelAttribute ContratoDto contratoDto) {
-        contratosService.salvarContrato(contratoDto);
+    public String salvarContrato(@ModelAttribute Contrato contrato) {
+        contratosService.salvarContrato(contrato);
         return "redirect:/inicio";
     }
 

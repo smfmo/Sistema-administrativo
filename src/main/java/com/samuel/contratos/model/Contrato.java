@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -56,6 +57,11 @@ public class Contrato {
     @Column(name = "data")
     @JsonFormat(pattern ="yyyy-MM-dd")
     private LocalDate data;
+
+    @ElementCollection
+    @CollectionTable(name = "contratos_pdf",
+    joinColumns = @JoinColumn(name = "contrato_id"))
+    private List<String> urlPdf;
 
     @ManyToOne
     @JoinColumn(name = "id_cliente")
