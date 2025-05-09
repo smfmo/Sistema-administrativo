@@ -4,19 +4,29 @@ import com.samuel.contratos.controller.dtos.ContratoDto;
 import com.samuel.contratos.controller.mappers.ContratoMapper;
 import com.samuel.contratos.model.Contrato;
 import com.samuel.contratos.model.TiposDeContrato;
+import com.samuel.contratos.service.ArmazenamentoPdfService;
 import com.samuel.contratos.service.ClienteService;
 import com.samuel.contratos.service.ContratoService;
 import com.samuel.contratos.service.DateUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 @RequestMapping("/contratos")
@@ -25,7 +35,7 @@ public class ContratosController {
 
     private final ContratoService contratosService;
     private final ClienteService clienteService;
-    private final ContratoMapper contratoMapper;
+    private final ArmazenamentoPdfService armazenamentoPdfService;
 
     @GetMapping("/form/addContrato")
     public String mostrarFormularioContrato(@ModelAttribute Contrato contrato,
@@ -37,8 +47,25 @@ public class ContratosController {
         return "formulario-contrato";
     }
     @PostMapping
-    public String salvarContrato(@ModelAttribute Contrato contrato) {
-        contratosService.salvarContrato(contrato);
+    public String salvarContrato(@ModelAttribute Contrato contrato,
+                                 @RequestParam("pdf") MultipartFile[] pdf,
+                                 RedirectAttributes redirectAttributes) {
+
+        try {
+            List<String> nomesPdf = armazenamentoPdfService.armazenarPdf(pdf);
+            contrato.setUrlPdf(nomesPdf);
+            contratosService.salvarContrato(contrato);
+
+            redirectAttributes.addFlashAttribute("success", "Contrato salvo com sucesso!");
+        } catch (IOException e) {
+            redirectAttributes.addFlashAttribute("error",
+                    "Erro ao salvar arquivos: " + e.getMessage());
+            return "redirect:/inicio";
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error",
+                    "Erro ao salvar contrato: " + e.getMessage());
+            return "redirect:/inicio";
+        }
         return "redirect:/inicio";
     }
 
