@@ -16,7 +16,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -26,15 +25,14 @@ public class PdfViewController {
     private final Path fileStorageLocation = Paths.get("uploads").toAbsolutePath().normalize();
 
     @GetMapping("/view/{filename:.+}")
-    public ResponseEntity<Resource> viewPdf(@PathVariable String filename) {
+    public ResponseEntity<Resource> vizualizarPdf(@PathVariable String filename) {
         try {
-            Path filePath = this.fileStorageLocation.resolve(filename).normalize();
-            Resource resource = new UrlResource(filePath.toUri());
+            Path caminhoArquivo = this.fileStorageLocation.resolve(filename).normalize();
+            Resource resource = new UrlResource(caminhoArquivo.toUri());
 
             if (!resource.exists()) {
                 return ResponseEntity.notFound().build();
             }
-
             return ResponseEntity.ok()
                     .contentType(MediaType.APPLICATION_PDF)
                     .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + resource.getFilename() + "\"")

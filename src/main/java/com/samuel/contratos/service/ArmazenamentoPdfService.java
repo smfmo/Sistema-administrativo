@@ -23,7 +23,6 @@ public class ArmazenamentoPdfService {
             throw new IOException("Arquivo vazio, não há pdf!");
         }
 
-        // Verifica se é um PDF
         if (!Objects.requireNonNull(arquivo.getContentType()).equalsIgnoreCase("application/pdf")) {
             throw new IOException("O arquivo deve ser do tipo PDF");
         }
