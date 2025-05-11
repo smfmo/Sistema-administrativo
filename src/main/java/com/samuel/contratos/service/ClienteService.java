@@ -50,4 +50,9 @@ public class ClienteService {
         return clientes.findById(id)
                 .orElseThrow(()-> new RuntimeException("cliente nao encontrado"));
     }
+
+    public Long contagemDeClientes(){
+        return clientes.countTotalClientes();
+    } //contagem total dos clientes no Daschboard
+
 }

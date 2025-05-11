@@ -1,7 +1,9 @@
 package com.samuel.contratos.controller;
 
 
+import com.samuel.contratos.model.Contrato;
 import com.samuel.contratos.repository.ContratosRepository;
+import com.samuel.contratos.service.ClienteService;
 import com.samuel.contratos.service.DateUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,7 @@ import java.util.Map;
 public class ContratosGraficosController {
 
     private final ContratosRepository contratosRepository;
+    private final ClienteService clienteService;
 
     @GetMapping("/inicio")
     public String index(Model model) {
@@ -44,8 +47,12 @@ public class ContratosGraficosController {
             totais[i] = contratosMap.getOrDefault(mes, 0L); // Preenche com zero se não houver contratos
         }
 
+        Long totalContratos = contratosRepository.countTotalContratos();
+        Long totalClientes = clienteService.contagemDeClientes();
         model.addAttribute("meses", todosMeses);
         model.addAttribute("totais", totais);
+        model.addAttribute("totalContratos", totalContratos);
+        model.addAttribute("totalClientes", totalClientes);
 
         return "grafico-geral";
     }

@@ -16,4 +16,7 @@ public interface ContratosRepository extends JpaRepository<Contrato, UUID> {
     List<Object[]> countContratosPorMes(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 
     List<Contrato> findByClienteId(UUID clienteId);
+
+    @Query("SELECT COUNT(c) FROM Contrato c")
+    Long countTotalContratos();
 }
