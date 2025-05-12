@@ -98,7 +98,6 @@ public class ContratosController {
 
         model.addAttribute("meses", todosMeses);
         model.addAttribute("totais", totais);
-        model.addAttribute("clienteId", id);
         model.addAttribute("contratos", contratosDoCliente);
 
         return "controle-contratos";
