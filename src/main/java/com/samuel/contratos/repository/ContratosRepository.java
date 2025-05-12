@@ -19,4 +19,16 @@ public interface ContratosRepository extends JpaRepository<Contrato, UUID> {
 
     @Query("SELECT COUNT(c) FROM Contrato c")
     Long countTotalContratos();
+
+
+    @Query(value = "SELECT TO_CHAR(c.data, 'YYYY-MM') AS mes, " +
+            "SUM(CAST(FUNCTION('REPLACE', FUNCTION('REPLACE', c.prestamista, '.', ''), ',', '.') AS double )) AS totalPrestamista, " +
+            "SUM(CAST(FUNCTION('REPLACE', FUNCTION('REPLACE', c.valorLiquido, '.', ''), ',', '.') AS double )) AS totalLiquido, " +
+            "SUM(CAST(FUNCTION('REPLACE', FUNCTION('REPLACE', c.valorBruto, '.', ''), ',', '.') AS double )) AS totalBruto " +
+            "FROM Contrato c " +
+            "WHERE c.data BETWEEN :startDate AND :endDate " +
+            "GROUP BY TO_CHAR(c.data, 'YYYY-MM') " +
+            "ORDER BY TO_CHAR(c.data, 'YYYY-MM')")
+    List<Object[]> calcularTotaisPorMes(@Param("startDate") LocalDate startDate,
+                                        @Param("endDate") LocalDate endDate);
 }

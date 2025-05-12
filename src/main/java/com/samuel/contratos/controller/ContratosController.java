@@ -11,6 +11,7 @@ import com.samuel.contratos.service.DateUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -109,5 +110,47 @@ public class ContratosController {
         model.addAttribute("contrato", contrato);
         return "informacoes-contratos";
     }
+    @GetMapping("/valores")
+    public String mostrarFormularioPesquisa(Model model) {
+        LocalDate dataFim = LocalDate.now();
+        LocalDate dataInicio = dataFim.minusMonths(12);
 
+        model.addAttribute("dataInicio", dataInicio);
+        model.addAttribute("dataFim", dataFim);
+        model.addAttribute("valores", Collections.emptyList()); // Lista vazia inicial
+
+        return "calculo-valores";
+    }
+
+
+    @PostMapping("/valores")
+    public String pesquisarValores(
+            @RequestParam("dataInicio") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicio,
+            @RequestParam("dataFim") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFim,
+            Model model) {
+
+        List<Map<String, Object>> valores = contratosService.calcularValoresPorMes(dataInicio, dataFim);
+
+        // Calcular totais
+        double totalPrestamista = valores.stream()
+                .mapToDouble(v -> (Double) v.get("prestamista"))
+                .sum();
+
+        double totalLiquido = valores.stream()
+                .mapToDouble(v -> (Double) v.get("liquido"))
+                .sum();
+
+        double totalBruto = valores.stream()
+                .mapToDouble(v -> (Double) v.get("bruto"))
+                .sum();
+
+        model.addAttribute("valores", valores);
+        model.addAttribute("dataInicio", dataInicio);
+        model.addAttribute("dataFim", dataFim);
+        model.addAttribute("totalPrestamista", totalPrestamista);
+        model.addAttribute("totalLiquido", totalLiquido);
+        model.addAttribute("totalBruto", totalBruto);
+
+        return "calculo-valores";
+    }
 }

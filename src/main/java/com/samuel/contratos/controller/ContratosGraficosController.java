@@ -1,7 +1,6 @@
 package com.samuel.contratos.controller;
 
 
-import com.samuel.contratos.model.Contrato;
 import com.samuel.contratos.repository.ContratosRepository;
 import com.samuel.contratos.service.ClienteService;
 import com.samuel.contratos.service.DateUtils;
@@ -54,7 +53,7 @@ public class ContratosGraficosController {
         model.addAttribute("totalContratos", totalContratos);
         model.addAttribute("totalClientes", totalClientes);
 
-        return "grafico-geral";
+        return "inicio";
     }
 
 /*    @GetMapping("controle-contratos")
