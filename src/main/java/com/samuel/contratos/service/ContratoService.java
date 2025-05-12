@@ -47,9 +47,10 @@ public class ContratoService {
         for (Object[] resultado : resultados){
             Map<String, Object> valores = new LinkedHashMap<>();
             valores.put("mes", resultado[0]);
-            valores.put("prestamista", resultado[1]);
-            valores.put("liquido", resultado[2]);
-            valores.put("bruto", resultado[3]);
+            valores.put("quantidade", resultado[1]);
+            valores.put("prestamista", resultado[2]);
+            valores.put("liquido", resultado[3]);
+            valores.put("bruto", resultado[4]);
             valoresPorMes.add(valores);
         }
 

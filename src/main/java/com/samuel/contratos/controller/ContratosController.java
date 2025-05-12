@@ -132,6 +132,10 @@ public class ContratosController {
         List<Map<String, Object>> valores = contratosService.calcularValoresPorMes(dataInicio, dataFim);
 
         // Calcular totais
+        long totalContratos = valores.stream()
+                .mapToLong(v -> ((Number) v.get("quantidade")).longValue())
+                .sum();
+
         double totalPrestamista = valores.stream()
                 .mapToDouble(v -> (Double) v.get("prestamista"))
                 .sum();
@@ -147,6 +151,7 @@ public class ContratosController {
         model.addAttribute("valores", valores);
         model.addAttribute("dataInicio", dataInicio);
         model.addAttribute("dataFim", dataFim);
+        model.addAttribute("totalContratos", totalContratos);
         model.addAttribute("totalPrestamista", totalPrestamista);
         model.addAttribute("totalLiquido", totalLiquido);
         model.addAttribute("totalBruto", totalBruto);
