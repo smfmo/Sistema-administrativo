@@ -6,14 +6,15 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.4.3</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/>
 	</parent>
 	<groupId>com.samuel</groupId>
 	<artifactId>contratos</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<name>contratos</name>
-	<description>integração do Back-End com uma biblioteca de gráficos de Js</description>
+	<description>Aplicação de gestão de contratos</description>
+
 	<developers>
 		<developer>
 			<name>Samuel Monteiro Ferreira</name>
