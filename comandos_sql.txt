@@ -1,0 +1,63 @@
+-- TABELAS DAS ENTIDADES DO BANCO DE DADOS --
+
+CREATE TABLE clientes (-- tabela de clientes (dados sensíveis) --
+    id UUID NOT NULL primary key,
+    nome_cliente VARCHAR(255) NOT NULL,
+    cpf varchar(255) NOT NULL UNIQUE,
+    data_nascimento DATE NOT NULL,
+    email VARCHAR(255),
+    estado_civil VARCHAR(255),
+    matricula int NOT NULL UNIQUE,
+    n_identidade VARCHAR(255) NOT NULL,
+    orgao_emissor VARCHAR(255) NOT NULL,
+    telefone VARCHAR(60) NOT NULL,
+    endereco_id UUID,
+
+    -- constraints --
+    CONSTRAINT fk_cliente_endereco FOREIGN KEY (endereco_id) REFERENCES endereco(id)
+);
+
+CREATE TABLE endereco ( -- tabela de endereços dos clientes --
+    id UUID NOT NULL primary key,
+    bairro VARCHAR(255),
+    cep VARCHAR(255),
+    localidade VARCHAR(255),
+    logradouro VARCHAR(255),
+    uf VARCHAR(255)
+);
+
+CREATE TABLE contratos ( -- tabela de contratos dos clientes --
+    id UUID NOT NULL primary key,
+    agencia VARCHAR(255) NOT NULL,
+    data DATE,
+    iof VARCHAR(255) NOT NULL,
+    juros_de_acerto VARCHAR(255) NOT NULL,
+    numero_do_contrato VARCHAR(255) NOT NULL,
+    parcelas VARCHAR(255) NOT NULL,
+    prestacao VARCHAR(255) NOT NULL,
+    prestamista VARCHAR(255) NOT NULL,
+    sr VARCHAR(255) NOT NULL,
+    tipo_de_contrato VARCHAR(255) NOT NULL,
+    valor_bruto VARCHAR(255) NOT NULL,
+    valor_liquido VARCHAR(255) NOT NULL,
+    id_cliente UUID,
+
+    -- constraints --
+    CONSTRAINT fk_contrato_cliente FOREIGN KEY (id_cliente) REFERENCES public.clientes(id),
+    CONSTRAINT check_tipo_contrato CHECK (tipo_de_contrato IN ('RENOVACAO', 'NOVO', 'HABITACIONAL'))
+);
+
+CREATE TABLE contratos_pdf (
+    contrato_id UUID NOT NULL primary key,
+    url_pdf VARCHAR(255),
+
+    -- constraints --
+    CONSTRAINT fk_contratos_pdf FOREIGN KEY (contrato_id) REFERENCES public.contratos (id)
+);
+
+CREATE TABLE user_adm ( -- administrador do sistema --
+    id UUID NOT NULL primary key,
+    password VARCHAR(255) NOT NULL,
+    username VARCHAR(255) NOT NULL UNIQUE,
+    role VARCHAR(255)
+);

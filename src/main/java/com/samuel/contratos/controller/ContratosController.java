@@ -1,7 +1,5 @@
 package com.samuel.contratos.controller;
 
-import com.samuel.contratos.controller.dtos.ContratoDto;
-import com.samuel.contratos.controller.mappers.ContratoMapper;
 import com.samuel.contratos.model.Contrato;
 import com.samuel.contratos.model.TiposDeContrato;
 import com.samuel.contratos.service.ArmazenamentoPdfService;
@@ -9,22 +7,13 @@ import com.samuel.contratos.service.ClienteService;
 import com.samuel.contratos.service.ContratoService;
 import com.samuel.contratos.service.DateUtils;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;

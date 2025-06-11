@@ -21,11 +21,11 @@ public class Cliente {
 
     @Column(name = "telefone",
             unique = true,
-            length = 50,
+            length = 60,
             nullable = false)
     private String telefone;
 
-    @Column(name = "data_de_nascimento",
+    @Column(name = "data_nascimento",
             nullable = false)
     private LocalDate dataNascimento;
 
