@@ -1,38 +1,58 @@
-# 📊 Dashboard de Contratos
+# 📊 Sistema administrativo com Dashboard e controle de contratos e clientes
 
-Este projeto é um **Dashboard de Contratos** desenvolvido com **Spring Boot** e **Thymeleaf**. Ele permite visualizar a quantidade de contratos por mês em um gráfico de barras e acessar uma página de controle de contratos, onde é possível listar todos os contratos cadastrados.
+Este projeto é um sistema administrativo para 
+uma empresa de empréstimos e contratos.
+Desenvolvido com a proposta de solucionar dores reais
+dos funcionários e chefes. O projeto consiste 
+em funcionalidades que automatizam alguns processos
+lentos dentro da empresa e auxilia na organização 
+tanto dos clientes, como dos contratos e documentos,
+esse sistema consiste na centralização dos dados de uma
+forma bastante simples, cada cliente vai ter seus
+respectivos contratos associados, e cada contrato terá
+seu documento anexado, melhorando assim a produtividade
+dos funcionários e livrando eles de atividades manuais
+que demandam certo tempo.
+
 
 ---
 ## Evidências visuais:
 
-### Login:
-![img.png](VisualEvidency/login.png)
+### Login
+![login.png](VisualEvidency/login.png)
 
-### Dashboard geral: 
-![img_1.png](VisualEvidency/dashboradGeral.png)
+### Dashboard geral
+![inicio.png](VisualEvidency/inicio.png)
 
-### cadastro de cliente:
-![img_1.png](VisualEvidency/cadastroCliente.png)
-![img_1.png](VisualEvidency/cadastroCliente2.png)
+### cadastro de cliente
+![cadastroCliente1.png](VisualEvidency/cadastroCliente.png)
+![cadastroCliente2.png](VisualEvidency/cadastroCliente2.png)
 
-### cadastro de contratos:
-![img_1.png](VisualEvidency/cadastroContrato.png)
+### cadastro de contratos
+![cadastroContratos.png](VisualEvidency/cadastroContrato.png)
 
-### controle de cliente:
-![img_1.png](VisualEvidency/controle.png)
+### controle de cliente
+![controle.png](VisualEvidency/controle.png)
 
-### detalhes do cliente:
-![img_1.png](VisualEvidency/detalhesCliente.png)
+### detalhes do cliente
+![detalhesCliente.png](VisualEvidency/detalhesCliente.png)
 
-### controle de cada contrato:
+### controle de cada contrato
 - Dashboard de contratos para cada cliente com seus respectivos contratos:
-![img_1.png](VisualEvidency/detalhesContrato1.png)
+![controleContratos.png](VisualEvidency/controleContratos.png)
 - informações do contrato para cada contrato selecionado:
-  ![img_1.png](VisualEvidency/detalhesContrato2.png)
+  ![detalhesContrato.png](VisualEvidency/detalhesContrato.png)
 - vizualização de Pdf do contrato
-  ![img_1.png](VisualEvidency/pdf.png)
+  ![pdf.png](VisualEvidency/pdf.png)
 
+### Calculo dos contratos
+- vizualização dos calculos dos contratos
+  ![calculoContratosMes.png](VisualEvidency/calculoContratosMes.png)
 
+### mesclagem (junção) dos documentos
+- página onde será feito a junção dos documentos
+do cliente e feito o download de um pdf único.
+  ![calculoContratosMes.png](VisualEvidency/mesclarDocs.png)
 ---
 
 ## 🚀 Funcionalidades
