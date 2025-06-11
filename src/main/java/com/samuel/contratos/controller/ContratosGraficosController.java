@@ -1,27 +1,37 @@
 package com.samuel.contratos.controller;
 
 
+import com.samuel.contratos.model.UserAdm;
 import com.samuel.contratos.repository.ContratosRepository;
 import com.samuel.contratos.service.ClienteService;
 import com.samuel.contratos.service.DateUtils;
+import com.samuel.contratos.service.UserAdmService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Controller
+@RequestMapping("/inicio")
 @RequiredArgsConstructor
 public class ContratosGraficosController {
 
     private final ContratosRepository contratosRepository;
     private final ClienteService clienteService;
 
-    @GetMapping("/inicio")
-    public String index(Model model) {
+    @GetMapping
+    public String index(Model model,
+                        @AuthenticationPrincipal UserAdm user) {
+
+        model.addAttribute("user", user); //busca o usuário logado.
+
         LocalDate startDate = LocalDate.now().minusMonths(12); // Últimos 12 meses
         LocalDate endDate = LocalDate.now();
 

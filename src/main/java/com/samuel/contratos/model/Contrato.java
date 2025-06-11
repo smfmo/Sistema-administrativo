@@ -1,6 +1,7 @@
 package com.samuel.contratos.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.samuel.contratos.model.Enum.TiposDeContrato;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;

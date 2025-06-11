@@ -1,6 +1,6 @@
 package com.samuel.contratos.controller.dtos;
 
-import com.samuel.contratos.model.TiposDeContrato;
+import com.samuel.contratos.model.Enum.TiposDeContrato;
 
 import java.time.LocalDate;
 import java.util.UUID;

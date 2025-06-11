@@ -13,17 +13,19 @@ public class Endereco {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @Column(name = "cep")
     private String cep;
-    private String logradouro;
-    //private String complemento;
-    private String bairro;
-    private String localidade;
-    private String uf;
-    //private String numero;
-    //private String ibge;
-    //private String gia;
-    //private String ddd;
-    //private String siafi;
 
-    //métodos getter e setter gerados pelo lombok
+    @Column(name = "logradouro")
+    private String logradouro;
+
+    @Column(name = "bairro")
+    private String bairro;
+
+    @Column(name = "localidade")
+    private String localidade;
+
+    @Column(name = "uf")
+    private String uf;
+
 }

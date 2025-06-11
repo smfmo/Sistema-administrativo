@@ -1,13 +1,12 @@
 package com.samuel.contratos.controller;
 
 import com.samuel.contratos.model.Contrato;
-import com.samuel.contratos.model.TiposDeContrato;
+import com.samuel.contratos.model.Enum.TiposDeContrato;
 import com.samuel.contratos.service.ArmazenamentoPdfService;
 import com.samuel.contratos.service.ClienteService;
 import com.samuel.contratos.service.ContratoService;
 import com.samuel.contratos.service.DateUtils;
 import lombok.RequiredArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
