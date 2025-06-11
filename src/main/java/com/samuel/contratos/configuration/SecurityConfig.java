@@ -18,12 +18,18 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                .csrf(csrf -> csrf
+                        .ignoringRequestMatchers("/mesclarDocs/download")
+                )
+
                 .headers(headers -> headers
-                        .frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
+                        .frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin)
+                )
 
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/loginAdm").permitAll()
                         .requestMatchers("/pdf/**").permitAll()
+                        .requestMatchers("/mesclarDocs/download").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form

@@ -3,7 +3,6 @@ package com.samuel.contratos.service;
 import com.samuel.contratos.repository.ContratosRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
