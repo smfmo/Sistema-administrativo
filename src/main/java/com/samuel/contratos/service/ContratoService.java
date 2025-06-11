@@ -34,23 +34,4 @@ public class ContratoService {
         return contratosRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Contrato não encontrado"));
     }
-
-    public List<Map<String, Object>> calcularValoresPorMes(LocalDate dataInicio,
-                                                           LocalDate dataFim){
-
-        List<Object[]> resultados = contratosRepository.calcularTotaisPorMes(dataInicio, dataFim);
-        List<Map<String, Object>> valoresPorMes = new ArrayList<>();
-
-        for (Object[] resultado : resultados){
-            Map<String, Object> valores = new LinkedHashMap<>();
-            valores.put("mes", resultado[0]);
-            valores.put("quantidade", resultado[1]);
-            valores.put("prestamista", resultado[2]);
-            valores.put("liquido", resultado[3]);
-            valores.put("bruto", resultado[4]);
-            valoresPorMes.add(valores);
-        }
-
-        return valoresPorMes;
-    }
 }
