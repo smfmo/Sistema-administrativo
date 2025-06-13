@@ -78,6 +78,7 @@
           <div class="mb-3">
             <label for="cliente" class="form-label">Cliente:</label>
             <select th:field="*{cliente}" id="cliente" class="form-select" required>
+              <option value="">Selecione o cliente portador deste contrato</option>
               <option th:each="cliente : ${clientes}"
                       th:value="${cliente.id}"
                       th:text="${cliente.nome}"></option>
@@ -125,6 +126,7 @@
           <div class="mb-3">
             <label for="tipoContrato" class="form-label">Tipo de Contrato:</label>
             <select th:field="*{tipoContrato}" id="tipoContrato" class="form-select" required>
+              <option value="">Selecione o tipo de contrato </option>
               <option th:each="tipo : ${tiposDeContrato}"
                       th:value="${tipo}"
                       th:text="${tipo}"></option>

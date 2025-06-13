@@ -119,8 +119,13 @@
                     </div><br>
 
                     <div class="mb-3">
-                        <label for="estadocivil" class="form-label">Estado Civil:</label>
-                        <input type="text" class="form-control" th:field="*{estadoCivil}" id="estadocivil">
+                        <label for="tipoContrato" class="form-label">Estado Civil</label>
+                        <select th:field="*{estadoCivil}" id="tipoContrato" class="form-select" required>
+                            <option value="">Selecione o Estado Civil do cliente</option>
+                            <option th:each="estado : ${T(com.samuel.contratos.model.Enum.EstadoCivil).values()}"
+                                    th:value="${estado}"
+                                    th:text="${estado}"></option>
+                        </select>
                         <span class="text-danger" th:if="${#fields.hasErrors('estadoCivil')}" th:errors="*{estadoCivil}"></span>
                     </div>
 

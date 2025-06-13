@@ -16,6 +16,18 @@ CREATE TABLE clientes (-- tabela de clientes (dados sensíveis) --
     -- constraints --
     CONSTRAINT fk_cliente_endereco FOREIGN KEY (endereco_id) REFERENCES endereco(id)
 );
+ -- comentários para tabela de clientes --
+ COMMENT ON TABLE public.clientes IS 'Tabela de cadastro dos clientes';
+ COMMENT ON COLUMN public.clientes.nome_cliente IS 'Nome completo do cliente';
+ COMMENT ON COLUMN public.clientes.cpf IS 'CPF do cliente (único)';
+ COMMENT ON COLUMN public.clientes.data_nascimento IS 'data de nascimento do cliente';
+ COMMENT ON COLUMN public.clientes.email IS 'E-mail do cliente (Opcional)';
+ COMMENT ON COLUMN public.clientes.estado_civil IS 'estado civil do cliente';
+ COMMENT ON COLUMN public.clientes.matricula IS 'matricula do cliente, vinculo trabalhista do empregado com a empresa (único)';
+ COMMENT ON COLUMN public.clientes.n_identidade IS 'número da identidade';
+ COMMENT ON COLUMN public.clientes.orgao_emissor IS 'órgão emissor que emitiu a carteira de identidade';
+ COMMENT ON COLUMN public.clientes.telefone IS 'telefone para contato com o cliente (único)';
+ COMMENT ON COLUMN public.clientes.endereco_id IS 'id do endereço pertencente a esse cliente, endereços se encontram na tabela 'endereco'';
 
 CREATE TABLE endereco ( -- tabela de endereços dos clientes --
     id UUID NOT NULL primary key,

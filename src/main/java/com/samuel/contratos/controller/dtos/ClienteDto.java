@@ -1,5 +1,6 @@
 package com.samuel.contratos.controller.dtos;
 
+import com.samuel.contratos.model.Enum.EstadoCivil;
 import jakarta.validation.constraints.*;
 import org.hibernate.validator.constraints.br.CPF;
 
@@ -25,10 +26,8 @@ public record ClienteDto(
         @NotBlank(message = "Campo obrigatório")
                 @Size(max = 10, min = 4, message = "campo fora do tamanho padrão")
         String orgaoEmissor,
-        @NotBlank(message = "Campo obrigátorio")
-        String estadoCivil,
+        EstadoCivil estadoCivil,
         @Email
         String email,
         EnderecoDto endereco) {
-
 }

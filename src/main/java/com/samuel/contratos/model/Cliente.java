@@ -1,5 +1,6 @@
 package com.samuel.contratos.model;
 
+import com.samuel.contratos.model.Enum.EstadoCivil;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDate;
@@ -48,8 +49,9 @@ public class Cliente {
             name = "orgao_emissor")
     private String orgaoEmissor;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "estado_civil")
-    private String estadoCivil;
+    private EstadoCivil estadoCivil;
 
     @Column(name = "email")
     private String email;
