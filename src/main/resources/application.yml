@@ -2,7 +2,7 @@ spring:
   application:
     name: contratos
   datasource:
-    url: jdbc:postgresql://localhost:5432/Correspondentedb
+    url: jdbc:postgresql://localhost:5433/correspondentedb
     username: postgres
     password: 123456
   jpa:

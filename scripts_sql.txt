@@ -14,7 +14,8 @@ CREATE TABLE clientes (-- tabela de clientes (dados sensíveis) --
     endereco_id UUID,
 
     -- constraints --
-    CONSTRAINT fk_cliente_endereco FOREIGN KEY (endereco_id) REFERENCES endereco(id)
+    CONSTRAINT fk_cliente_endereco FOREIGN KEY (endereco_id) REFERENCES endereco(id),
+    CONSTRAINT check_estado_civil CHECK (estado_civil IN ('SOLTEIRO', 'CASADO', 'DIVORCIADO', 'UNIAO_ESTAVEL', 'VIUVO'))
 );
  -- comentários para tabela de clientes --
  COMMENT ON TABLE public.clientes IS 'Tabela de cadastro dos clientes';

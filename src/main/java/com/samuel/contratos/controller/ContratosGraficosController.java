@@ -5,14 +5,12 @@ import com.samuel.contratos.model.UserAdm;
 import com.samuel.contratos.repository.ContratosRepository;
 import com.samuel.contratos.service.ClienteService;
 import com.samuel.contratos.service.DateUtils;
-import com.samuel.contratos.service.UserAdmService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
