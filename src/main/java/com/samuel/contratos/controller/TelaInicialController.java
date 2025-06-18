@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/inicio")
 @RequiredArgsConstructor
-public class ContratosGraficosController {
+public class TelaInicialController {
 
     private final ClienteService clienteService;
     private final GraficosService graficosService;
