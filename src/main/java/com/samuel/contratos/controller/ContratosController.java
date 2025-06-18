@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Controller
@@ -63,35 +61,13 @@ public class ContratosController {
     public String contratosPorCliente(@PathVariable UUID id,
                                       Model model) {
 
-        LocalDate startDate = LocalDate.now().minusMonths(12); // Contratos dos últimos 12 meses
-        LocalDate endDate = LocalDate.now();
-
-        // Gerar todos os meses no intervalo
-        List<String> todosMeses = graficosService.gerarMesesNoIntervalo();
-
-        // Buscar contratos por mês no banco de dados para o cliente específico
-        List<Contrato> contratosDoCliente = contratosService.listarContratosPorCliente(id);
-
-        // Criar um mapa para facilitar a busca de contratos por mês
-        Map<String, Long> contratosMap = new HashMap<>();
-        for (Contrato contrato : contratosDoCliente) {
-            String mes = contrato.getData().format(DateTimeFormatter.ofPattern("yyyy-MM"));
-            contratosMap.put(mes, contratosMap.getOrDefault(mes, 0L) + 1);
-        }
-
-        // Preencher os totais de contratos para todos os meses
-        Long[] totais = new Long[todosMeses.size()];
-        for (int i = 0; i < todosMeses.size(); i++) {
-            String mes = todosMeses.get(i);
-            totais[i] = contratosMap.getOrDefault(mes, 0L); // Preenche com zero se não houver contratos
-        }
-
-        model.addAttribute("meses", todosMeses);
-        model.addAttribute("totais", totais);
-        model.addAttribute("contratos", contratosDoCliente);
+        model.addAttribute("meses", graficosService.gerarMesesNoIntervalo());
+        model.addAttribute("totais", graficosService.mostrarGraficosDoCliente(id));
+        model.addAttribute("contratos", contratosService.listarContratosPorCliente(id));
 
         return "controle-contratos";
     }
+
     @GetMapping("/{id}")
     public String informacoesContrato(@PathVariable UUID id,
                                       Model model) {

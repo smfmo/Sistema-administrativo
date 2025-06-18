@@ -1,25 +1,21 @@
 package com.samuel.contratos.service;
 
+import com.samuel.contratos.model.Contrato;
 import com.samuel.contratos.repository.ContratosRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
 public class GraficosService {
 
     private final ContratosRepository contratosRepository;
+    private final ContratoService contratoService;
 
     public Long[] mostrarGrafico(){
-
-        LocalDate startDate = LocalDate.now().minusMonths(12);
-        LocalDate endDate = LocalDate.now();
 
         List<String> todosMeses = gerarMesesNoIntervalo();
 
@@ -36,6 +32,25 @@ public class GraficosService {
         for (int i = 0; i < todosMeses.size(); i++) {
             String mes = todosMeses.get(i);
             totais[i] = contratosMap.getOrDefault(mes, 0L); // Preenche com zero se não houver contratos
+        }
+
+        return totais;
+    }
+
+    public Long[] mostrarGraficosDoCliente(UUID clienteId){
+        List<String> todosMeses = gerarMesesNoIntervalo();
+        List<Contrato> contratosDoCliente = contratoService.listarContratosPorCliente(clienteId);
+
+        Map<String, Long> contratosMap = new HashMap<>();
+        for (Contrato contrato : contratosDoCliente) {
+            String mes = contrato.getData().format(DateTimeFormatter.ofPattern("yyyy-MM"));
+            contratosMap.put(mes, contratosMap.getOrDefault(mes, 0L) + 1);
+        }
+
+        Long[] totais = new Long[todosMeses.size()];
+        for (int i = 0; i < todosMeses.size(); i++) {
+            String mes = todosMeses.get(i);
+            totais[i] = contratosMap.getOrDefault(mes, 0L);
         }
 
         return totais;
