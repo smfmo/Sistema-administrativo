@@ -5,7 +5,7 @@ import com.samuel.contratos.model.Enum.TiposDeContrato;
 import com.samuel.contratos.service.ArmazenamentoPdfService;
 import com.samuel.contratos.service.ClienteService;
 import com.samuel.contratos.service.ContratoService;
-import com.samuel.contratos.service.DateUtils;
+import com.samuel.contratos.service.GraficosService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +25,7 @@ public class ContratosController {
     private final ContratoService contratosService;
     private final ClienteService clienteService;
     private final ArmazenamentoPdfService armazenamentoPdfService;
+    private final GraficosService graficosService;
 
     @GetMapping("/form/addContrato")
     public String mostrarFormularioContrato(@ModelAttribute Contrato contrato,
@@ -66,7 +67,7 @@ public class ContratosController {
         LocalDate endDate = LocalDate.now();
 
         // Gerar todos os meses no intervalo
-        List<String> todosMeses = DateUtils.gerarMesesNoIntervalo(startDate, endDate);
+        List<String> todosMeses = graficosService.gerarMesesNoIntervalo();
 
         // Buscar contratos por mês no banco de dados para o cliente específico
         List<Contrato> contratosDoCliente = contratosService.listarContratosPorCliente(id);

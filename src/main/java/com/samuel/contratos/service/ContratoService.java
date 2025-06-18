@@ -31,4 +31,5 @@ public class ContratoService {
         return contratosRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Contrato não encontrado"));
     }
+
 }
