@@ -21,11 +21,9 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf
                         .ignoringRequestMatchers("/mesclarDocs/download")
                 )
-
                 .headers(headers -> headers
                         .frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin)
                 )
-
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/loginAdm").permitAll()
                         .requestMatchers("/pdf/**").permitAll()
