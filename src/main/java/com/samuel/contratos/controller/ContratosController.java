@@ -25,22 +25,24 @@ public class ContratosController {
     private final ArmazenamentoPdfService armazenamentoPdfService;
     private final GraficosService graficosService;
 
-    @GetMapping("/form/addContrato")
-    public String mostrarFormularioContrato(@ModelAttribute Contrato contrato,
-                                            Model model) {
-        model.addAttribute("contrato", contrato);
+    @GetMapping
+    public String getContractsForm(@ModelAttribute Contrato contrato,
+                                   Model model) {
 
+        model.addAttribute("contrato", contrato);
         model.addAttribute("clientes", clienteService.listarClientes());
         model.addAttribute("tiposDeContrato", TiposDeContrato.values());
+
         return "formulario-contrato";
     }
+
     @PostMapping
-    public String salvarContrato(@ModelAttribute Contrato contrato,
-                                 @RequestParam("pdf") MultipartFile[] pdf,
-                                 RedirectAttributes redirectAttributes) {
+    public String save(@ModelAttribute Contrato contrato,
+                       @RequestParam("pdf") MultipartFile[] pdf,
+                       RedirectAttributes redirectAttributes) {
 
         try {
-            List<String> nomesPdf = armazenamentoPdfService.armazenarPdf(pdf);
+            List<String> nomesPdf = armazenamentoPdfService.receivePdf(pdf);
             contrato.setUrlPdf(nomesPdf);
             contratosService.salvarContrato(contrato);
 
