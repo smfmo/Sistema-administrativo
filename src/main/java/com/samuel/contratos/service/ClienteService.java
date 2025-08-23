@@ -8,6 +8,7 @@ import com.samuel.contratos.repository.ClientesRepository;
 import com.samuel.contratos.repository.ContratosRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.UUID;
 
@@ -19,10 +20,14 @@ public class ClienteService {
     private final ContratosRepository contratos;
     private final ClienteMapper clienteMapper;
 
-    public void salvarCliente(ClienteDto clienteDto) {
-
+    @Transactional
+    public void save(ClienteDto clienteDto) {
         Cliente cliente = clienteMapper.toEntity(clienteDto);
         clientes.save(cliente);
+    }
+
+    public void partialUpdate() {
+
     }
 
     /** metodo de exclusao e atualizaçao
