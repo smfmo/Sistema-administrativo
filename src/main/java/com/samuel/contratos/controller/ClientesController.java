@@ -39,6 +39,13 @@ public class ClientesController {
         return "redirect:/inicio";
     }
 
+    @GetMapping("/editar/{id}")
+    public String partialUpdate(@PathVariable("id") UUID id,
+                                @ModelAttribute("clienteDto") @Valid ClienteDto clienteDto) {
+        clienteService.partialUpdate(id, clienteDto);
+        return "/Atualizar-cliente";
+    }
+
     @GetMapping("/list")
     public String listarClientes(Model model) {
         List<Cliente> clientes = clienteService.listarClientes();

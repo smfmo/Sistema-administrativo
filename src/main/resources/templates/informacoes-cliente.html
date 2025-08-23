@@ -65,7 +65,7 @@
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Informações do Cliente</a>
         <div>
-            <a href="#" class="btn btn-custom me-2">Editar</a>
+            <a th:href="@{/clientes/editar/{id}(id=${id})}" class="btn btn-custom me-2">Editar</a>
             <a th:href="@{/clientes/list}" class="btn btn-outline-light">Voltar</a>
         </div>
     </div>

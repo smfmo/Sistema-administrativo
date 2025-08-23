@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atualizar Cliente</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      padding-bottom: 2rem;
+    }
+    .card {
+      margin-top: 2rem;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .navbar {
+      background-color: #083271;
+    }
+    .navbar-brand {
+      color: white !important;
+      font-weight: bold;
+    }
+    .btn-custom {
+      background-color: #083271;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      color: white;
+      transition: background-color 0.3s ease;
+    }
+    .btn-custom:hover {
+      background-color: #0d47a1;
+    }
+    .btn-outline-custom {
+      color: #083271;
+      border-color: #083271;
+    }
+    .btn-outline-custom:hover {
+      background-color: #083271;
+      color: white;
+    }
+    .form-box{
+      background-color: #eceff1;
+      border-radius: 8px;
+      padding: 20px;
+      border: 1px solid #cfd8dc;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+    .section-title {
+      border-bottom: 2px solid #083271;
+      padding-bottom: 10px;
+      margin: 25px 0 15px;
+      color: #083271;
+    }
+    .form-label {
+      font-weight: 500;
+    }
+    .alert-info {
+      background-color: #e9f5ff;
+      border-color: #083271;
+      color: #083271;
+    }
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Atualizar dados do cliente</a>
+    <div>
+      <a th:href="@{/Controle-de-clientes}" class="btn btn-outline-light">Voltar</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="card shadow-lg p-4">
+        <h2 class="text-center mb-4">Atualizar Cliente</h2>
+
+        <div class="alert alert-info" role="alert">
+          <i class="bi bi-info-circle"></i> Apenas os campos que você modificar serão atualizados.
+        </div>
+
+        <!-- Formulário de atualização -->
+        <form th:action="@{/clientes/editar/{id}(id=${id})}" method="post">
+          <input type="hidden" name="_method" value="patch" />
+
+          <h4 class="section-title">Informações Pessoais</h4>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="nome" class="form-label">Nome:</label>
+                <input type="text" class="form-control" id="nome" name="nome"
+                       th:value="${clienteDto.nome}" required>
+                <div class="text-danger" th:if="${#fields.hasErrors('nome')}" th:errors="*{clienteDto.nome}"></div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="telefone" class="form-label">Telefone:</label>
+                <input type="text" class="form-control" id="telefone" name="telefone"
+                       th:value="${clienteDto.telefone}">
+                <div class="text-danger" th:if="${#fields.hasErrors('telefone')}" th:errors="*{clienteDto.telefone}"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="dataNascimento" class="form-label">Data de Nascimento:</label>
+                <input type="date" class="form-control" id="dataNascimento" name="dataNascimento"
+                       th:value="${clienteDto.dataNascimento}">
+                <div class="text-danger" th:if="${#fields.hasErrors('dataNascimento')}" th:errors="*{clienteDto.dataNascimento}"></div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" class="form-control" id="email" name="email"
+                       th:value="${clienteDto.email}">
+                <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{clienteDto.email}"></div>
+              </div>
+            </div>
+          </div>
+
+          <h4 class="section-title">Documentação</h4>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="cpf" class="form-label">CPF:</label>
+                <input type="text" class="form-control" id="cpf" name="cpf"
+                       th:value="${clienteDto.cpf}">
+                <div class="text-danger" th:if="${#fields.hasErrors('cpf')}" th:errors="*{clienteDto.cpf}"></div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="matricula" class="form-label">Matrícula/Benefício:</label>
+                <input type="number" class="form-control" id="matricula" name="matricula"
+                       th:value="${clienteDto.matricula}">
+                <div class="text-danger" th:if="${#fields.hasErrors('matricula')}" th:errors="*{clienteDto.matricula}"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label class="form-label">Número de Identidade:</label>
+                <input type="text" class="form-control" name="numeroIdentidade"
+                       th:value="${clienteDto.numeroIdentidade}">
+                <div class="text-danger" th:if="${#fields.hasErrors('numeroIdentidade')}" th:errors="*{clienteDto.numeroIdentidade}"></div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label class="form-label">Órgão Emissor:</label>
+                <input type="text" class="form-control" name="orgaoEmissor"
+                       th:value="${clienteDto.orgaoEmissor}">
+                <div class="text-danger" th:if="${#fields.hasErrors('orgaoEmissor')}" th:errors="*{clienteDto.orgaoEmissor}"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="estadoCivil" class="form-label">Estado Civil</label>
+            <select id="estadoCivil" class="form-select" name="estadoCivil">
+              <option value="">Selecione o Estado Civil do cliente</option>
+              <option th:each="estado : ${T(com.samuel.contratos.model.Enum.EstadoCivil).values()}"
+                      th:value="${estado}"
+                      th:text="${estado}"
+                      th:selected="${clienteDto.estadoCivil == estado}"></option>
+            </select>
+            <div class="text-danger" th:if="${#fields.hasErrors('estadoCivil')}" th:errors="*{clienteDto.estadoCivil}"></div>
+          </div>
+
+          <h4 class="section-title">Endereço</h4>
+
+          <div class="form-box">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="mb-3">
+                  <label for="cep">CEP:</label>
+                  <input type="text" class="form-control" id="cep" name="endereco.cep"
+                         th:value="${clienteDto.endereco?.cep}" placeholder="Digite o CEP">
+                </div>
+              </div>
+              <div class="col-md-8 d-flex align-items-end">
+                <button type="button" class="btn btn-outline-custom" onclick="validarCep()">Buscar Endereço</button>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-8">
+                <div class="mb-3">
+                  <label for="logradouro" class="form-label">Endereço:</label>
+                  <input type="text" class="form-control" id="logradouro" name="endereco.logradouro"
+                         th:value="${clienteDto.endereco?.logradouro}">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="mb-3">
+                  <label for="bairro" class="form-label">Bairro:</label>
+                  <input type="text" class="form-control" id="bairro" name="endereco.bairro"
+                         th:value="${clienteDto.endereco?.bairro}">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="localidade" class="form-label">Cidade:</label>
+                  <input type="text" class="form-control" id="localidade" name="endereco.localidade"
+                         th:value="${clienteDto.endereco?.localidade}">
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="mb-3">
+                  <label for="uf" class="form-label">UF:</label>
+                  <input type="text" class="form-control" id="uf" name="endereco.uf"
+                         th:value="${clienteDto.endereco?.uf}">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-center mt-4">
+            <button type="submit" class="btn btn-custom me-2">Atualizar Cliente</button>
+            <a th:href="@{/Controle-de-clientes}" class="btn btn-outline-secondary">Cancelar</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Script de validação de CEP
+  function validarCep(){
+    const cep = document.getElementById('cep').value.replace(/\D/g, '');
+    if (cep.length !== 8){
+      alert('CEP inválido. Deve conter 8 dígitos.');
+      return false;
+    }
+
+    fetch(`/cep/${cep}`)
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('CEP não encontrado');
+              }
+              return response.json();
+            })
+            .then(data => {
+              document.getElementById('logradouro').value = data.logradouro || '';
+              document.getElementById('bairro').value = data.bairro || '';
+              document.getElementById('localidade').value = data.localidade || '';
+              document.getElementById('uf').value = data.uf || '';
+            })
+            .catch(error => {
+              console.error('Erro ao buscar CEP:', error);
+              alert('Erro ao buscar CEP. Verifique o número e tente novamente.');
+            });
+  }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

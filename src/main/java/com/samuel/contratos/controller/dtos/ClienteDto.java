@@ -3,7 +3,6 @@ package com.samuel.contratos.controller.dtos;
 import com.samuel.contratos.model.Enum.EstadoCivil;
 import jakarta.validation.constraints.*;
 import org.hibernate.validator.constraints.br.CPF;
-
 import java.time.LocalDate;
 
 public record ClienteDto(
