@@ -28,7 +28,6 @@ public class ContratosController {
     @GetMapping
     public String getContractsForm(@ModelAttribute Contrato contrato,
                                    Model model) {
-
         model.addAttribute("contrato", contrato);
         model.addAttribute("clientes", clienteService.listarClientes());
         model.addAttribute("tiposDeContrato", TiposDeContrato.values());
@@ -40,7 +39,6 @@ public class ContratosController {
     public String save(@ModelAttribute Contrato contrato,
                        @RequestParam("pdf") MultipartFile[] pdf,
                        RedirectAttributes redirectAttributes) {
-
         try {
             List<String> nomesPdf = armazenamentoPdfService.receivePdf(pdf);
             contrato.setUrlPdf(nomesPdf);
@@ -62,7 +60,6 @@ public class ContratosController {
     @GetMapping("/cliente/{id}")
     public String contratosPorCliente(@PathVariable UUID id,
                                       Model model) {
-
         model.addAttribute("meses", graficosService.gerarMesesNoIntervalo());
         model.addAttribute("totais", graficosService.mostrarGraficosDoCliente(id));
         model.addAttribute("contratos", contratosService.listarContratosPorCliente(id));
@@ -71,7 +68,7 @@ public class ContratosController {
     }
 
     @GetMapping("/{id}")
-    public String informacoesContrato(@PathVariable UUID id,
+    public String informacoesContrato(@PathVariable("id") UUID id,
                                       Model model) {
         Contrato contrato = contratosService.informacoesContrato(id);
         model.addAttribute("contrato", contrato);
