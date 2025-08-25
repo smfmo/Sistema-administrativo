@@ -32,4 +32,7 @@ public class ContratoService {
                 .orElseThrow(()-> new RuntimeException("Contrato não encontrado"));
     }
 
+    public Long totalContratos() {
+        return contratosRepository.countTotalContratos();
+    }
 }
