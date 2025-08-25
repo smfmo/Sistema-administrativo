@@ -2,10 +2,7 @@ package com.samuel.contratos.controller;
 
 import com.samuel.contratos.model.Contrato;
 import com.samuel.contratos.model.Enum.TiposDeContrato;
-import com.samuel.contratos.service.ArmazenamentoPdfService;
-import com.samuel.contratos.service.ClienteService;
-import com.samuel.contratos.service.ContratoService;
-import com.samuel.contratos.service.GraficosService;
+import com.samuel.contratos.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +20,8 @@ public class ContratosController {
     private final ContratoService contratosService;
     private final ClienteService clienteService;
     private final ArmazenamentoPdfService armazenamentoPdfService;
-    private final GraficosService graficosService;
+    private final GraficsService graficsService;
+    private final GraficStatisticsService graficsStatisticsService;
 
     @GetMapping
     public String getContractsForm(@ModelAttribute Contrato contrato,
@@ -60,8 +58,8 @@ public class ContratosController {
     @GetMapping("/cliente/{id}")
     public String contratosPorCliente(@PathVariable UUID id,
                                       Model model) {
-        model.addAttribute("meses", graficosService.gerarMesesNoIntervalo());
-        model.addAttribute("totais", graficosService.mostrarGraficosDoCliente(id));
+        model.addAttribute("meses", graficsStatisticsService.gerarMesesNoIntervalo());
+        model.addAttribute("totais", graficsService.mostrarGraficosDoCliente(id));
         model.addAttribute("contratos", contratosService.listarContratosPorCliente(id));
 
         return "controle-contratos";
