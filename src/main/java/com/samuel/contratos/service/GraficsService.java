@@ -1,8 +1,6 @@
 package com.samuel.contratos.service;
 
 import com.samuel.contratos.model.Contrato;
-import com.samuel.contratos.repository.ContratosRepository;
-import com.samuel.contratos.util.DateUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.time.format.DateTimeFormatter;
@@ -10,13 +8,13 @@ import java.util.*;
 
 @Service
 @RequiredArgsConstructor
-public class GraficosService {
+public class GraficsService {
 
-    private final ContratosRepository contratosRepository;
     private final ContratoService contratoService;
+    private final GraficStatisticsService graficsStatisticsService;
 
     public Long[] mostrarGrafico(){
-        List<Object[]> contratosPorMes = DateUtils.contratosPorMes();
+        List<Object[]> contratosPorMes = graficsStatisticsService.contratosPorMes();
         Map<String, Long> contratosMap = new HashMap<>();
 
         for (Object[] contrato : contratosPorMes) {
@@ -39,7 +37,7 @@ public class GraficosService {
     }
 
     private Long[] totaisPorMes(Map<String, Long> contratosMap) {
-        List<String> todosMeses = gerarMesesNoIntervalo();
+        List<String> todosMeses = graficsStatisticsService.gerarMesesNoIntervalo();
         Long[] totais = new Long[todosMeses.size()];
 
         for (int i = 0; i < todosMeses.size(); i++) {
