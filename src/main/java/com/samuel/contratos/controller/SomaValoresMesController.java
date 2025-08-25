@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import java.time.LocalDate;
 import java.util.Collections;
-import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/valores")
@@ -38,34 +36,7 @@ public class SomaValoresMesController {
             @RequestParam("dataInicio") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicio,
             @RequestParam("dataFim") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFim,
             Model model) {
-
-        List<Map<String, Object>> valores = service.calcularValoresPorMes(dataInicio, dataFim);
-
-        // Calcular totais
-        long totalContratos = valores.stream()
-                .mapToLong(v -> ((Number) v.get("quantidade")).longValue())
-                .sum();
-
-        double totalPrestamista = valores.stream()
-                .mapToDouble(v -> (Double) v.get("prestamista"))
-                .sum();
-
-        double totalLiquido = valores.stream()
-                .mapToDouble(v -> (Double) v.get("liquido"))
-                .sum();
-
-        double totalBruto = valores.stream()
-                .mapToDouble(v -> (Double) v.get("bruto"))
-                .sum();
-
-        model.addAttribute("valores", valores);
-        model.addAttribute("dataInicio", dataInicio);
-        model.addAttribute("dataFim", dataFim);
-        model.addAttribute("totalContratos", totalContratos);
-        model.addAttribute("totalPrestamista", totalPrestamista);
-        model.addAttribute("totalLiquido", totalLiquido);
-        model.addAttribute("totalBruto", totalBruto);
-
+        service.carregarDados(dataInicio, dataFim, model);
         return "calculo-valores";
     }
 }
