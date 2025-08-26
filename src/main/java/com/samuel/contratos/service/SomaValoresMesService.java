@@ -19,7 +19,6 @@ public class SomaValoresMesService {
 
     public List<Map<String, Object>> calcularValoresPorMes(LocalDate dataInicio,
                                                            LocalDate dataFim){
-
         List<Object[]> resultados = repository.calcularTotaisPorMes(dataInicio, dataFim);
         List<Map<String, Object>> valoresPorMes = new ArrayList<>();
 
@@ -32,7 +31,6 @@ public class SomaValoresMesService {
             valores.put("bruto", resultado[4]);
             valoresPorMes.add(valores);
         }
-
         return valoresPorMes;
     }
 
@@ -57,7 +55,6 @@ public class SomaValoresMesService {
         double totalBruto = valores.stream()
                 .mapToDouble(v -> ((Number) v.get("bruto"))
                         .doubleValue()).sum();
-
 
         model.addAttribute("valores", valores);
         model.addAttribute("dataInicio", dataInicio);
