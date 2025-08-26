@@ -21,12 +21,12 @@ public class SomaValoresMesController {
 
     @GetMapping
     public String mostrarFormularioPesquisa(Model model) {
-        LocalDate dataFim = LocalDate.now();
-        LocalDate dataInicio = dataFim.minusMonths(12);
+        LocalDate endDate = LocalDate.now();
+        LocalDate startDate = endDate.minusMonths(12);
 
-        model.addAttribute("dataInicio", dataInicio);
-        model.addAttribute("dataFim", dataFim);
-        model.addAttribute("valores", Collections.emptyList()); // Lista vazia inicial
+        model.addAttribute("dataInicio", startDate);
+        model.addAttribute("dataFim", endDate);
+        model.addAttribute("valores", Collections.emptyList());
 
         return "calculo-valores";
     }
