@@ -48,8 +48,13 @@ public class ClienteService {
     public List<Cliente> listarClientes() {
         return repository.findAll();
     }
-    public List<Contrato> listarContratosPorCliente(UUID clienteId) {
-        return contratosRepository.findByClienteId(clienteId);
+
+    public void listarContratosPorCliente() {
+        for (Cliente cliente : listarClientes()) {
+            List<Contrato> contratosDoCliente = contratosRepository
+                    .findByClienteId(cliente.getId());
+            cliente.setContratos(contratosDoCliente);
+        }
     }
 
     //pesquisar o cliente
