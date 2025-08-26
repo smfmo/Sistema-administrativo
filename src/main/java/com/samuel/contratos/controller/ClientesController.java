@@ -49,14 +49,6 @@ public class ClientesController {
     @GetMapping("/list")
     public String listarClientes(Model model) {
         List<Cliente> clientes = clienteService.listarClientes();
-
-        //para cada cliente, busca os contratos associados
-        for (Cliente cliente : clientes) {
-            List<Contrato> contratosDoCliente = clienteService
-                    .listarContratosPorCliente(cliente.getId());
-            cliente.setContratos(contratosDoCliente);
-        }
-
         model.addAttribute("clientes", clientes);
 
         return "Controle-de-clientes";
