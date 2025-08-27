@@ -39,7 +39,7 @@ public class ContratosController {
         try {
             List<String> nomesPdf = armazenamentoPdfService.receivePdf(pdf);
             contrato.setUrlPdf(nomesPdf);
-            contratosService.salvarContrato(contrato);
+            contratosService.save(contrato);
 
             redirectAttributes.addFlashAttribute("success", "Contrato salvo com sucesso!");
         } catch (IOException e) {
