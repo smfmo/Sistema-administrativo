@@ -8,17 +8,20 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
-public interface ContratosRepository extends JpaRepository<Contrato, UUID> {
-    @Query("SELECT TO_CHAR(c.data, 'YYYY-MM') AS mes, COUNT(c) AS total " +
-            "FROM Contrato c " +
-            "WHERE c.data BETWEEN :startDate AND :endDate " +
-            "GROUP BY TO_CHAR(c.data, 'YYYY-MM')")
-    List<Object[]> countContratosPorMes(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
-
+public interface ContratoRepository extends JpaRepository<Contrato, UUID> {
     List<Contrato> findByClienteId(UUID clienteId);
 
     @Query("SELECT COUNT(c) FROM Contrato c")
     Long countTotalContratos();
+
+    @Query("SELECT TO_CHAR(c.data, 'YYYY-MM') AS mes, COUNT(c) AS total " +
+            "FROM Contrato c " +
+            "WHERE c.data BETWEEN :startDate AND :endDate " +
+            "GROUP BY TO_CHAR(c.data, 'YYYY-MM')")
+    List<Object[]> countContratosPorMes(
+            @Param("startDate") LocalDate startDate,
+            @Param("endDate") LocalDate endDate
+    );
 
 
     @Query(value = "SELECT TO_CHAR(c.data, 'YYYY-MM') AS mes, " +
@@ -30,6 +33,8 @@ public interface ContratosRepository extends JpaRepository<Contrato, UUID> {
             "WHERE c.data BETWEEN :startDate AND :endDate " +
             "GROUP BY TO_CHAR(c.data, 'YYYY-MM') " +
             "ORDER BY TO_CHAR(c.data, 'YYYY-MM')")
-    List<Object[]> calcularTotaisPorMes(@Param("startDate") LocalDate startDate,
-                                        @Param("endDate") LocalDate endDate);
+    List<Object[]> calcularTotaisPorMes(
+            @Param("startDate") LocalDate startDate,
+            @Param("endDate") LocalDate endDate
+    );
 }
