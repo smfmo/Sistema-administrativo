@@ -3,23 +3,23 @@ package com.samuel.contratos.service;
 import com.samuel.contratos.controller.dtos.ClienteDto;
 import com.samuel.contratos.controller.mappers.ClienteMapper;
 import com.samuel.contratos.model.Cliente;
-import com.samuel.contratos.model.Contrato;
-import com.samuel.contratos.repository.ClientesRepository;
-import com.samuel.contratos.repository.ContratosRepository;
+import com.samuel.contratos.repository.ClienteRepository;
 import jakarta.persistence.EntityNotFoundException;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.UUID;
 
 @Service
-@RequiredArgsConstructor
 public class ClienteService {
 
-    private final ClientesRepository repository;
-    private final ContratosRepository contratosRepository;
+    private final ClienteRepository repository;
     private final ClienteMapper mapper;
+
+    public ClienteService(ClienteRepository repository, ClienteMapper mapper) {
+        this.repository = repository;
+        this.mapper = mapper;
+    }
 
     @Transactional
     public void save(ClienteDto clienteDto) {
@@ -36,28 +36,10 @@ public class ClienteService {
         repository.save(clienteExistente);
     }
 
-    /** metodo de exclusao e atualizaçao
-     * public void excluirCliente(Cliente cliente) {
-     *         repository.delete(cliente);
-     *     }
-     *     public void atualizarDadosCliente(Cliente cliente) {
-     *         repository.save(cliente);
-     *     }
-     */
-
     public List<Cliente> listarClientes() {
         return repository.findAll();
     }
 
-    public void listarContratosPorCliente() {
-        for (Cliente cliente : listarClientes()) {
-            List<Contrato> contratosDoCliente = contratosRepository
-                    .findByClienteId(cliente.getId());
-            cliente.setContratos(contratosDoCliente);
-        }
-    }
-
-    //pesquisar o cliente
     public List<Cliente> pesquisarCliente(String nome) {
         return repository.findByNomeContainingIgnoreCase(nome);
     }
@@ -69,6 +51,6 @@ public class ClienteService {
 
     public Long contagemDeClientes(){
         return repository.countTotalClientes();
-    } //contagem total dos repository no Daschboard
+    }
 
 }
