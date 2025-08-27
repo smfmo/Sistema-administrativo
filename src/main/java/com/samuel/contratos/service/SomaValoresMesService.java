@@ -1,6 +1,6 @@
 package com.samuel.contratos.service;
 
-import com.samuel.contratos.repository.ContratosRepository;
+import com.samuel.contratos.repository.ContratoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -15,7 +15,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class SomaValoresMesService {
 
-    private final ContratosRepository repository;
+    private final ContratoRepository repository;
 
     public List<Map<String, Object>> calcularValoresPorMes(LocalDate dataInicio,
                                                            LocalDate dataFim){
