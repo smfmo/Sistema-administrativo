@@ -29,7 +29,6 @@ public class ContratosController {
         model.addAttribute("contrato", contrato);
         model.addAttribute("clientes", clienteService.listarClientes());
         model.addAttribute("tiposDeContrato", TiposDeContrato.values());
-
         return "formulario-contrato";
     }
 
@@ -61,7 +60,6 @@ public class ContratosController {
         model.addAttribute("meses", graficsStatisticsService.gerarMesesNoIntervalo());
         model.addAttribute("totais", graficsService.mostrarGraficosDoCliente(id));
         model.addAttribute("contratos", contratosService.listarContratosPorCliente(id));
-
         return "controle-contratos";
     }
 
