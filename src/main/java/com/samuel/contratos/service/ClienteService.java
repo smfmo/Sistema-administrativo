@@ -1,6 +1,6 @@
 package com.samuel.contratos.service;
 
-import com.samuel.contratos.controller.dtos.ClienteDto;
+import com.samuel.contratos.controller.dtos.request.ClienteRequestDTO;
 import com.samuel.contratos.controller.mappers.ClienteMapper;
 import com.samuel.contratos.model.Cliente;
 import com.samuel.contratos.repository.ClienteRepository;
@@ -22,18 +22,18 @@ public class ClienteService {
     }
 
     @Transactional
-    public void save(ClienteDto clienteDto) {
-        Cliente cliente = mapper.toEntity(clienteDto);
+    public void save(ClienteRequestDTO request) {
+        Cliente cliente = mapper.toEntity(request);
         repository.save(cliente);
     }
 
     @Transactional
-    public void partialUpdate(UUID id, ClienteDto clienteAtualizado) {
-        Cliente clienteExistente = repository.findById(id)
+    public void partialUpdate(UUID id, ClienteRequestDTO updatedClient) {
+        Cliente existingClient = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Client not found!")
         );
-        mapper.updatePartial(clienteAtualizado, clienteExistente);
-        repository.save(clienteExistente);
+        mapper.updatePartial(updatedClient, existingClient);
+        repository.save(existingClient);
     }
 
     public List<Cliente> listarClientes() {
