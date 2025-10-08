@@ -4,20 +4,27 @@ import com.samuel.contratos.model.Contrato;
 import com.samuel.contratos.repository.ContratoRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.*;
 
 @Service
 public class ContratoService {
 
     private final ContratoRepository repository;
+    private final ArmazenamentoPdfService pdfService;
 
-    public ContratoService(ContratoRepository repository) {
+    public ContratoService(ContratoRepository repository,
+                           ArmazenamentoPdfService pdfService) {
         this.repository = repository;
+        this.pdfService = pdfService;
     }
 
     @Transactional
-    public void save(Contrato contrato) {
+    public void save(Contrato contrato, MultipartFile[] pdf) throws IOException {
+        List<String> namesPdf = pdfService.receivePdf(pdf);
+        contrato.setUrlPdf(namesPdf);
         repository.save(contrato);
     }
 
