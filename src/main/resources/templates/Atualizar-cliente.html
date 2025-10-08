@@ -98,16 +98,16 @@
               <div class="mb-3">
                 <label for="nome" class="form-label">Nome:</label>
                 <input type="text" class="form-control" id="nome" name="nome"
-                       th:value="${clienteDto.nome}" required>
-                <div class="text-danger" th:if="${#fields.hasErrors('nome')}" th:errors="*{clienteDto.nome}"></div>
+                       th:value="${clienteRequest.nome}" required>
+                <div class="text-danger" th:if="${#fields.hasErrors('nome')}" th:errors="*{clienteRequest.nome}"></div>
               </div>
             </div>
             <div class="col-md-6">
               <div class="mb-3">
                 <label for="telefone" class="form-label">Telefone:</label>
                 <input type="text" class="form-control" id="telefone" name="telefone"
-                       th:value="${clienteDto.telefone}">
-                <div class="text-danger" th:if="${#fields.hasErrors('telefone')}" th:errors="*{clienteDto.telefone}"></div>
+                       th:value="${clienteRequest.telefone}">
+                <div class="text-danger" th:if="${#fields.hasErrors('telefone')}" th:errors="*{clienteRequest.telefone}"></div>
               </div>
             </div>
           </div>
@@ -117,16 +117,16 @@
               <div class="mb-3">
                 <label for="dataNascimento" class="form-label">Data de Nascimento:</label>
                 <input type="date" class="form-control" id="dataNascimento" name="dataNascimento"
-                       th:value="${clienteDto.dataNascimento}">
-                <div class="text-danger" th:if="${#fields.hasErrors('dataNascimento')}" th:errors="*{clienteDto.dataNascimento}"></div>
+                       th:value="${clienteRequest.dataNascimento}">
+                <div class="text-danger" th:if="${#fields.hasErrors('dataNascimento')}" th:errors="*{clienteRequest.dataNascimento}"></div>
               </div>
             </div>
             <div class="col-md-6">
               <div class="mb-3">
                 <label for="email" class="form-label">Email:</label>
                 <input type="email" class="form-control" id="email" name="email"
-                       th:value="${clienteDto.email}">
-                <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{clienteDto.email}"></div>
+                       th:value="${clienteRequest.email}">
+                <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{clienteRequest.email}"></div>
               </div>
             </div>
           </div>
@@ -138,16 +138,16 @@
               <div class="mb-3">
                 <label for="cpf" class="form-label">CPF:</label>
                 <input type="text" class="form-control" id="cpf" name="cpf"
-                       th:value="${clienteDto.cpf}">
-                <div class="text-danger" th:if="${#fields.hasErrors('cpf')}" th:errors="*{clienteDto.cpf}"></div>
+                       th:value="${clienteRequest.cpf}">
+                <div class="text-danger" th:if="${#fields.hasErrors('cpf')}" th:errors="*{clienteRequest.cpf}"></div>
               </div>
             </div>
             <div class="col-md-6">
               <div class="mb-3">
                 <label for="matricula" class="form-label">Matrícula/Benefício:</label>
                 <input type="number" class="form-control" id="matricula" name="matricula"
-                       th:value="${clienteDto.matricula}">
-                <div class="text-danger" th:if="${#fields.hasErrors('matricula')}" th:errors="*{clienteDto.matricula}"></div>
+                       th:value="${clienteRequest.matricula}">
+                <div class="text-danger" th:if="${#fields.hasErrors('matricula')}" th:errors="*{clienteRequest.matricula}"></div>
               </div>
             </div>
           </div>
@@ -157,16 +157,16 @@
               <div class="mb-3">
                 <label class="form-label">Número de Identidade:</label>
                 <input type="text" class="form-control" name="numeroIdentidade"
-                       th:value="${clienteDto.numeroIdentidade}">
-                <div class="text-danger" th:if="${#fields.hasErrors('numeroIdentidade')}" th:errors="*{clienteDto.numeroIdentidade}"></div>
+                       th:value="${clienteRequest.numeroIdentidade}">
+                <div class="text-danger" th:if="${#fields.hasErrors('numeroIdentidade')}" th:errors="*{clienteRequest.numeroIdentidade}"></div>
               </div>
             </div>
             <div class="col-md-6">
               <div class="mb-3">
                 <label class="form-label">Órgão Emissor:</label>
                 <input type="text" class="form-control" name="orgaoEmissor"
-                       th:value="${clienteDto.orgaoEmissor}">
-                <div class="text-danger" th:if="${#fields.hasErrors('orgaoEmissor')}" th:errors="*{clienteDto.orgaoEmissor}"></div>
+                       th:value="${clienteRequest.orgaoEmissor}">
+                <div class="text-danger" th:if="${#fields.hasErrors('orgaoEmissor')}" th:errors="*{clienteRequest.orgaoEmissor}"></div>
               </div>
             </div>
           </div>
@@ -178,9 +178,9 @@
               <option th:each="estado : ${T(com.samuel.contratos.model.Enum.EstadoCivil).values()}"
                       th:value="${estado}"
                       th:text="${estado}"
-                      th:selected="${clienteDto.estadoCivil == estado}"></option>
+                      th:selected="${clienteRequest.estadoCivil == estado}"></option>
             </select>
-            <div class="text-danger" th:if="${#fields.hasErrors('estadoCivil')}" th:errors="*{clienteDto.estadoCivil}"></div>
+            <div class="text-danger" th:if="${#fields.hasErrors('estadoCivil')}" th:errors="*{clienteRequest.estadoCivil}"></div>
           </div>
 
           <h4 class="section-title">Endereço</h4>
@@ -191,7 +191,7 @@
                 <div class="mb-3">
                   <label for="cep">CEP:</label>
                   <input type="text" class="form-control" id="cep" name="endereco.cep"
-                         th:value="${clienteDto.endereco?.cep}" placeholder="Digite o CEP">
+                         th:value="${clienteRequest.endereco?.cep}" placeholder="Digite o CEP">
                 </div>
               </div>
               <div class="col-md-8 d-flex align-items-end">
@@ -204,14 +204,14 @@
                 <div class="mb-3">
                   <label for="logradouro" class="form-label">Endereço:</label>
                   <input type="text" class="form-control" id="logradouro" name="endereco.logradouro"
-                         th:value="${clienteDto.endereco?.logradouro}">
+                         th:value="${clienteRequest.endereco?.logradouro}">
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="mb-3">
                   <label for="bairro" class="form-label">Bairro:</label>
                   <input type="text" class="form-control" id="bairro" name="endereco.bairro"
-                         th:value="${clienteDto.endereco?.bairro}">
+                         th:value="${clienteRequest.endereco?.bairro}">
                 </div>
               </div>
             </div>
@@ -221,14 +221,14 @@
                 <div class="mb-3">
                   <label for="localidade" class="form-label">Cidade:</label>
                   <input type="text" class="form-control" id="localidade" name="endereco.localidade"
-                         th:value="${clienteDto.endereco?.localidade}">
+                         th:value="${clienteRequest.endereco?.localidade}">
                 </div>
               </div>
               <div class="col-md-2">
                 <div class="mb-3">
                   <label for="uf" class="form-label">UF:</label>
                   <input type="text" class="form-control" id="uf" name="endereco.uf"
-                         th:value="${clienteDto.endereco?.uf}">
+                         th:value="${clienteRequest.endereco?.uf}">
                 </div>
               </div>
             </div>
