@@ -1,6 +1,6 @@
 package com.samuel.contratos.controller.mappers;
 
-import com.samuel.contratos.controller.dtos.ClienteDto;
+import com.samuel.contratos.controller.dtos.request.ClienteRequestDTO;
 import com.samuel.contratos.model.Cliente;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
@@ -12,11 +12,11 @@ public interface ClienteMapper {
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updatePartial(
-            ClienteDto clienteDto,
+            ClienteRequestDTO clienteRequestDTO,
             @MappingTarget Cliente cliente
     );
 
-    Cliente toEntity(ClienteDto dto);
+    Cliente toEntity(ClienteRequestDTO dto);
 
-    ClienteDto toDto(Cliente cliente);
+    ClienteRequestDTO toDto(Cliente cliente);
 }
