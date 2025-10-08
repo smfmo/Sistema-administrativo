@@ -4,9 +4,8 @@ import com.samuel.contratos.model.Cliente;
 import com.samuel.contratos.model.Enum.TiposDeContrato;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
-public record ContratoDto(
+public record ContratoRequestDTO(
         String agencia,
         String sr,
         String valorBruto,

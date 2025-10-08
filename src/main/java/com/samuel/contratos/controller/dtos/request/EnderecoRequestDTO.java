@@ -1,7 +1,7 @@
 package com.samuel.contratos.controller.dtos.request;
 
 
-public record EnderecoDto(
+public record EnderecoRequestDTO(
         String cep,
         String logradouro,
         String bairro,

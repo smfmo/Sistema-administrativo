@@ -5,7 +5,7 @@ import jakarta.validation.constraints.*;
 import org.hibernate.validator.constraints.br.CPF;
 import java.time.LocalDate;
 
-public record ClienteDto(
+public record ClienteRequestDTO(
         @NotBlank(message = "Campo Obrigatório")
                 @Size(max = 255, min = 2, message = "Campo fora do tamanho padrão ")
         String nome,
@@ -28,5 +28,5 @@ public record ClienteDto(
         EstadoCivil estadoCivil,
         @Email
         String email,
-        EnderecoDto endereco) {
+        EnderecoRequestDTO endereco) {
 }
