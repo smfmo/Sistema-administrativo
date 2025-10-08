@@ -1,5 +1,6 @@
-package com.samuel.contratos.controller.dtos;
+package com.samuel.contratos.controller.dtos.request;
 
+import com.samuel.contratos.model.Cliente;
 import com.samuel.contratos.model.Enum.TiposDeContrato;
 
 import java.time.LocalDate;
@@ -16,8 +17,7 @@ public record ContratoDto(
         String iof,
         String jurosAcerto,
         LocalDate data,
-        UUID clienteId,
-        TiposDeContrato tiposDeContrato,
-        String numeroDoContrato) {
-
-}
+        Cliente cliente,
+        TiposDeContrato tipoContrato,
+        String numeroDoContrato
+) {}

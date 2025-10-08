@@ -1,4 +1,4 @@
-package com.samuel.contratos.controller.dtos;
+package com.samuel.contratos.controller.dtos.request;
 
 
 public record EnderecoDto(

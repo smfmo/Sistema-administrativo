@@ -1,4 +1,4 @@
-package com.samuel.contratos.controller.dtos;
+package com.samuel.contratos.controller.dtos.request;
 
 import com.samuel.contratos.model.Enum.EstadoCivil;
 import jakarta.validation.constraints.*;
