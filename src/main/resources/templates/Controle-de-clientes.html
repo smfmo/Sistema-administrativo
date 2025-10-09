@@ -78,17 +78,15 @@
                 <th>Nome</th>
                 <th>Telefone</th>
                 <th>CPF</th>
-                <th>Email</th>
                 <th>Contratos</th>
                 <th>detalhes do cliente</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="cliente : ${clientes}">
+            <tr th:each="cliente : ${listaClientes}">
                 <td th:text="${cliente.nome}"></td>
                 <td th:text="${cliente.telefone}"></td>
                 <td th:text="${cliente.cpf}"></td>
-                <td th:text="${cliente.email}"></td>
                 <td>
                     <div>
                         <a th:href="@{/contratos/cliente/{id}(id=${cliente.id})}" class="btn btn-custom">Clique Aqui</a>
