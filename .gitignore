@@ -34,4 +34,5 @@ build/
 # uploads
 uploads/
 
+# scripts sql
 /scripts_sql.txt
