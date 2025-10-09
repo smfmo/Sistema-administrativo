@@ -13,8 +13,8 @@ public record ClienteRequestDTO(
                 @Pattern(regexp = "^(\\(?\\d{2}\\)?[\\s-]?)?(\\d{4,5}[\\s-]?\\d{4})$",
                         message = "número de celular inválido Use (XX) XXXX-XXXX ou (XX) XXXXX-XXXX")
         String telefone,
-        @NotNull(message = "campo obrigátorio")
-        @Past
+        @NotNull(message = "campo obrigatório")
+        @Past(message = "Data de nascimento não pode ser uma data futura")
         LocalDate dataNascimento,
         @CPF
         String cpf,
