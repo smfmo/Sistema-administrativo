@@ -6,7 +6,6 @@ import com.samuel.contratos.model.Cliente;
 import com.samuel.contratos.service.ClienteService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,7 +16,6 @@ import java.util.UUID;
 @Controller
 @RequestMapping("/clientes")
 @RequiredArgsConstructor
-@Slf4j
 public class ClientesController {
 
     private final ClienteService service;
@@ -31,18 +29,21 @@ public class ClientesController {
 
     @PostMapping
     public String save(@ModelAttribute("cliente") @Valid ClienteRequestDTO request,
-                                BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "formulario-cliente";
-        }
-        service.save(request);
+                       BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) return "formulario-cliente";
+
+        Cliente cliente = mapper.toEntity(request);
+        service.save(cliente);
 
         return "redirect:/inicio";
     }
 
     @GetMapping("/editar/{id}")
     public String partialUpdate(@PathVariable("id") UUID id,
-                                @ModelAttribute("clienteRequest") @Valid ClienteRequestDTO request) {
+                                @ModelAttribute("clienteRequest") @Valid ClienteRequestDTO request,
+                                BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) return "Atualizar-cliente";
+
         service.partialUpdate(id, request);
         return "/Atualizar-cliente";
     }
