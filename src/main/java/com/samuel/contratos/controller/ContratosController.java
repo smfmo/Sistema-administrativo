@@ -13,7 +13,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import java.io.IOException;
 import java.util.*;
 
 @Controller
@@ -22,16 +21,13 @@ import java.util.*;
 public class ContratosController {
 
     private final ContratoService contratosService;
-    private final ClienteService clienteService;
     private final GraficsService graficsService;
     private final GraficStatisticsService graficsStatisticsService;
     private final ContratoMapper mapper;
 
     @GetMapping
-    public String getContractsForm(@ModelAttribute ContratoRequestDTO request,
-                                   Model model) {
-        model.addAttribute("contrato", mapper.toEntity(request));
-        model.addAttribute("clientes", clienteService.listarClientes());
+    public String getContractsForm(Model model) {
+        model.addAttribute("contrato", new Contrato());
         model.addAttribute("tiposDeContrato", TiposDeContrato.values());
         return "formulario-contrato";
     }
@@ -41,25 +37,12 @@ public class ContratosController {
                        @RequestParam("pdf") MultipartFile[] pdf,
                        RedirectAttributes redirectAttributes,
                        BindingResult bindingResult) {
-        try {
-            if (bindingResult.hasErrors()) {
-                return "formulario-contrato";
-            }
-
-            Contrato contrato = mapper.toEntity(request);
-            contratosService.save(contrato, pdf);
-            redirectAttributes.addFlashAttribute("success", "Contrato salvo com sucesso!");
+        if (bindingResult.hasErrors()) {
+            return "formulario-contrato";
         }
-        catch (IOException e) {
-            redirectAttributes.addFlashAttribute("error",
-                    "Erro ao salvar arquivos: " + e.getMessage());
-            return "redirect:/inicio";
-        }
-        catch (Exception e) {
-            redirectAttributes.addFlashAttribute("error",
-                    "Erro ao salvar contrato: " + e.getMessage());
-            return "redirect:/inicio";
-        }
+        Contrato contrato = mapper.toEntity(request);
+        contratosService.save(contrato, pdf);
+        redirectAttributes.addFlashAttribute("success", "Contrato salvo com sucesso!");
         return "redirect:/inicio";
     }
 
