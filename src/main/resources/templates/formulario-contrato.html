@@ -76,10 +76,10 @@
             </div>
           </div><br>
           <div class="mb-3">
-            <label for="cliente" class="form-label">Cliente:</label>
-            <select th:field="*{cliente}" id="cliente" class="form-select" required>
+            <label for="clientes" class="form-label">Cliente:</label>
+            <select th:field="*{cliente}" id="clientes" class="form-select" required>
               <option value="">Selecione o cliente portador deste contrato</option>
-              <option th:each="cliente : ${clientes}"
+              <option th:each="cliente : ${listaClientes}"
                       th:value="${cliente.id}"
                       th:text="${cliente.nome}"></option>
             </select>
