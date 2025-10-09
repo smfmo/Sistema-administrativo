@@ -23,7 +23,7 @@ public class ContratoService {
     }
 
     @Transactional
-    public void save(Contrato contrato, MultipartFile[] pdf) {
+    public void save(Contrato contrato, List<MultipartFile> pdf) {
         try {
             List<String> namesPdf = pdfService.receivePdf(pdf);
             contrato.setUrlPdf(namesPdf);
