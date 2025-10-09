@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.samuel.contratos.model.Enum.TiposDeContrato;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
@@ -13,7 +12,6 @@ import java.util.UUID;
 @Table(name = "contratos",
         schema = "public")
 @Data
-@NoArgsConstructor //adiciona um construtor vazio
 public class Contrato {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -75,11 +73,5 @@ public class Contrato {
     @Column(name = "numero_do_contrato")
     private String numeroDoContrato;
 
-    public Contrato(LocalDate data,
-                    String numeroDoContrato,
-                    Cliente cliente) {
-        this.data = data;
-        this.numeroDoContrato = numeroDoContrato;
-        this.cliente = cliente;
-    }
+    public Contrato() {}
 }

@@ -28,4 +28,5 @@ public class Endereco {
     @Column(name = "uf")
     private String uf;
 
+    public Endereco() {}
 }

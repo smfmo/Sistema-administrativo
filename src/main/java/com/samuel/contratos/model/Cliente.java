@@ -65,5 +65,5 @@ public class Cliente {
     @JoinColumn(name = "endereco_id")
     private Endereco endereco;
 
-    //metodos getters e setters gerados pelo Lombok (@Data)
+    public Cliente() {}
 }
