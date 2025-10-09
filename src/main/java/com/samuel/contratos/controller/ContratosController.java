@@ -34,7 +34,7 @@ public class ContratosController {
 
     @PostMapping
     public String save(@ModelAttribute @Valid ContratoRequestDTO request,
-                       @RequestParam("pdf") MultipartFile[] pdf,
+                       @RequestParam("pdf") List<MultipartFile> pdf,
                        RedirectAttributes redirectAttributes,
                        BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
