@@ -1,5 +1,6 @@
 package com.samuel.contratos.service;
 
+import com.samuel.contratos.exception.ArquivoProcessingException;
 import com.samuel.contratos.model.Contrato;
 import com.samuel.contratos.repository.ContratoRepository;
 import org.springframework.stereotype.Service;
@@ -22,10 +23,15 @@ public class ContratoService {
     }
 
     @Transactional
-    public void save(Contrato contrato, MultipartFile[] pdf) throws IOException {
-        List<String> namesPdf = pdfService.receivePdf(pdf);
-        contrato.setUrlPdf(namesPdf);
-        repository.save(contrato);
+    public void save(Contrato contrato, MultipartFile[] pdf) {
+        try {
+            List<String> namesPdf = pdfService.receivePdf(pdf);
+            contrato.setUrlPdf(namesPdf);
+            repository.save(contrato);
+        }
+        catch (IOException e) {
+            throw new ArquivoProcessingException("Erro ao salvar arquivos: " + e.getMessage());
+        }
     }
 
     public List<Contrato> listarContratosPorCliente(UUID id) {
