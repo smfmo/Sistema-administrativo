@@ -6,6 +6,7 @@ import com.samuel.contratos.model.Cliente;
 import com.samuel.contratos.service.ClienteService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,25 +17,26 @@ import java.util.UUID;
 @Controller
 @RequestMapping("/clientes")
 @RequiredArgsConstructor
+@Slf4j
 public class ClientesController {
 
     private final ClienteService service;
     private final ClienteMapper mapper;
 
     @GetMapping
-    public String getCustomerForm(@ModelAttribute ClienteRequestDTO request,
-                                  Model model) {
-        model.addAttribute("clienteRequest", mapper.toEntity(request));
+    public String getCustomerForm(Model model) {
+        model.addAttribute("cliente", new Cliente());
         return "formulario-cliente";
     }
 
     @PostMapping
-    public String save(@ModelAttribute("clienteDto") @Valid ClienteRequestDTO request,
+    public String save(@ModelAttribute("cliente") @Valid ClienteRequestDTO request,
                                 BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) { //se houver erros no formulário, volta para o mesmo
+        if (bindingResult.hasErrors()) {
             return "formulario-cliente";
         }
         service.save(request);
+
         return "redirect:/inicio";
     }
 
@@ -46,10 +48,7 @@ public class ClientesController {
     }
 
     @GetMapping("/list")
-    public String listarClientes(Model model) {
-        List<Cliente> clientes = service.listarClientes();
-        model.addAttribute("clientes", clientes);
-
+    public String listarClientes() {
         return "Controle-de-clientes";
     }
 
