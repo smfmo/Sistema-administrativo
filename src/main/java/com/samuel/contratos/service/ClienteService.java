@@ -22,8 +22,7 @@ public class ClienteService {
     }
 
     @Transactional
-    public void save(ClienteRequestDTO request) {
-        Cliente cliente = mapper.toEntity(request);
+    public void save(Cliente cliente) {
         repository.save(cliente);
     }
 
