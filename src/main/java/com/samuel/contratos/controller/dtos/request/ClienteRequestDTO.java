@@ -28,5 +28,5 @@ public record ClienteRequestDTO(
         EstadoCivil estadoCivil,
         @Email
         String email,
-        EnderecoRequestDTO endereco) {
-}
+        EnderecoRequestDTO endereco
+) {}

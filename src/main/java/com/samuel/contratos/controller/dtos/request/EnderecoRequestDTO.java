@@ -6,5 +6,5 @@ public record EnderecoRequestDTO(
         String logradouro,
         String bairro,
         String localidade,
-        String uf) {
-}
+        String uf
+) {}
