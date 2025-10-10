@@ -4,7 +4,7 @@ import com.samuel.contratos.repository.ContratoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -44,17 +44,17 @@ public class SomaValoresMesService {
                 .mapToLong(v -> ((Number) v.get("quantidade"))
                         .longValue()).sum();
 
-        double totalPrestamista = valores.stream()
-                .mapToDouble(v -> ((Number) v.get("prestamista"))
-                        .doubleValue()).sum();
+        BigDecimal totalPrestamista = valores.stream()
+                .map(v -> ((BigDecimal) v.get("prestamista")))
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        double totalLiquido = valores.stream()
-                .mapToDouble(v -> ((Number) v.get("liquido"))
-                        .doubleValue()).sum();
+        BigDecimal totalLiquido = valores.stream()
+                .map(v -> ((BigDecimal) v.get("liquido")))
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        double totalBruto = valores.stream()
-                .mapToDouble(v -> ((Number) v.get("bruto"))
-                        .doubleValue()).sum();
+        BigDecimal totalBruto = valores.stream()
+                .map(v -> ((BigDecimal) v.get("bruto")))
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         model.addAttribute("valores", valores);
         model.addAttribute("dataInicio", dataInicio);
