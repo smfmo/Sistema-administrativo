@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.samuel.contratos.model.Enum.TiposDeContrato;
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
@@ -27,15 +29,15 @@ public class Contrato {
 
     @Column(nullable = false,
             name = "valor_bruto")
-    private String valorBruto;
+    private BigDecimal valorBruto;
 
     @Column(nullable = false,
             name = "valor_liquido")
-    private String valorLiquido;
+    private BigDecimal valorLiquido;
 
     @Column(nullable = false,
             name = "prestacao")
-    private String prestacao;
+    private BigDecimal prestacao;
 
     @Column(nullable = false,
             name = "parcelas")
@@ -43,15 +45,15 @@ public class Contrato {
 
     @Column(nullable = false,
             name = "prestamista")
-    private String prestamista;
+    private BigDecimal prestamista;
 
     @Column(nullable = false,
             name = "iof")
-    private String iof;
+    private BigDecimal iof;
 
     @Column(nullable = false,
             name = "juros_de_acerto")
-    private String jurosAcerto;
+    private BigDecimal jurosAcerto;
 
     @Column(name = "data")
     @JsonFormat(pattern ="yyyy-MM-dd")
