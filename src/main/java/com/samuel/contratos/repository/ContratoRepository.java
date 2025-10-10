@@ -26,9 +26,9 @@ public interface ContratoRepository extends JpaRepository<Contrato, UUID> {
 
     @Query(value = "SELECT TO_CHAR(c.data, 'YYYY-MM') AS mes, " +
             "COUNT(c) AS quantidade," +
-            "SUM(CAST(FUNCTION('REPLACE', FUNCTION('REPLACE', c.prestamista, '.', ''), ',', '.') AS double )) AS totalPrestamista, " +
-            "SUM(CAST(FUNCTION('REPLACE', FUNCTION('REPLACE', c.valorLiquido, '.', ''), ',', '.') AS double )) AS totalLiquido, " +
-            "SUM(CAST(FUNCTION('REPLACE', FUNCTION('REPLACE', c.valorBruto, '.', ''), ',', '.') AS double )) AS totalBruto " +
+            "SUM(c.prestamista) AS totalPrestamista, " +
+            "SUM(c.valorLiquido) AS totalLiquido, " +
+            "SUM(c.valorBruto) AS totalBruto " +
             "FROM Contrato c " +
             "WHERE c.data BETWEEN :startDate AND :endDate " +
             "GROUP BY TO_CHAR(c.data, 'YYYY-MM') " +
