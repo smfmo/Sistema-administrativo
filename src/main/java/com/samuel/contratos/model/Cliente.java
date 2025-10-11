@@ -60,9 +60,7 @@ public class Cliente {
     @Transient
     private List<Contrato> contratos;
 
-    @OneToOne(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY)
-    @JoinColumn(name = "endereco_id")
+    @Embedded
     private Endereco endereco;
 
     public Cliente() {}
