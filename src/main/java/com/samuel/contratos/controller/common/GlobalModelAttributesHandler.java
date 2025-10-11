@@ -1,7 +1,7 @@
 package com.samuel.contratos.controller.common;
 
 import com.samuel.contratos.model.Cliente;
-import com.samuel.contratos.model.UserAdm;
+import com.samuel.contratos.model.User;
 import com.samuel.contratos.service.ClienteService;
 import com.samuel.contratos.service.ContratoService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -28,7 +28,7 @@ public class GlobalModelAttributesHandler {
     }
 
     @ModelAttribute("user")
-    public UserAdm getUser(@AuthenticationPrincipal UserAdm user) {
+    public User getUser(@AuthenticationPrincipal User user) {
         return user;
     }
 

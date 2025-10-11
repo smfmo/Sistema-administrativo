@@ -10,7 +10,7 @@ import java.util.UUID;
 
 @Data
 @Entity
-@Table(name = "user_adm",
+@Table(name = "employee",
         schema = "public")
 public class User implements UserDetails {
 

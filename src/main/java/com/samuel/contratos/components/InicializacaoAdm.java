@@ -1,6 +1,6 @@
 package com.samuel.contratos.components;
 
-import com.samuel.contratos.service.UserAdmService;
+import com.samuel.contratos.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -9,11 +9,11 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class InicializacaoAdm implements CommandLineRunner {
 
-    private final UserAdmService userAdmService;
+    private final UserService userService;
 
     @Override
     public void run(String... args) {
-        userAdmService.criarUsuarioAdmin("usuarioTeste", "patricia");
-        userAdmService.criarUsuarioAdmin("Samuel", "samuel123");
+        userService.criarUsuarioAdmin("usuarioTeste", "patricia");
+        userService.criarUsuarioAdmin("Samuel", "samuel123");
     }
 }

@@ -1,9 +1,8 @@
 package com.samuel.contratos.configuration;
 
-import com.samuel.contratos.repository.UserAdmRepository;
+import com.samuel.contratos.repository.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
@@ -46,9 +45,9 @@ public class SecurityConfig {
         return http.build();
     }
     @Bean
-    public UserDetailsService userDetailsService(UserAdmRepository admRepository) {
-        return username -> admRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));
+    public UserDetailsService userDetailsService(UserRepository repository) {
+        return username -> repository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Usuário no encontrado"));
     }
     @Bean
     public PasswordEncoder passwordEncoder() {

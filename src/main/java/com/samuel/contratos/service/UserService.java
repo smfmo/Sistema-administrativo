@@ -1,27 +1,27 @@
 package com.samuel.contratos.service;
 
-import com.samuel.contratos.model.UserAdm;
-import com.samuel.contratos.repository.UserAdmRepository;
+import com.samuel.contratos.model.User;
+import com.samuel.contratos.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class UserAdmService {
+public class UserService {
 
-    private final UserAdmRepository userAdmRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final UserRepository repository;
+    private final PasswordEncoder encoder;
 
     public void criarUsuarioAdmin(String username, String password) {
-        if (userAdmRepository.findByUsername(username).isPresent()){
+        if (repository.findByUsername(username).isPresent()){
             return;
         }
-        UserAdm user = new UserAdm();
+        User user = new User();
         user.setUsername(username);
-        user.setPassword(passwordEncoder.encode(password));
+        user.setPassword(encoder.encode(password));
         user.setRole("ADMIN"); //define o papel como administrador
 
-        userAdmRepository.save(user);
+        repository.save(user);
     }
 }
