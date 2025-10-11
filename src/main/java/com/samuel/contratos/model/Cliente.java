@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "clientes",
+@Table(name = "cliente",
         schema = "public")
 @Data
 public class Cliente {
@@ -16,7 +16,7 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(name = "nome_cliente",
+    @Column(name = "nome",
             nullable = false)
     private String nome;
 
@@ -42,7 +42,7 @@ public class Cliente {
 
     @Column(unique = true,
             nullable = false,
-            name = "n_identidade")
+            name = "numero_identidade")
     private String numeroIdentidade;
 
     @Column(nullable = false,
