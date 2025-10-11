@@ -149,27 +149,27 @@
                     <div class="form-box">
                         <div class="mb-3">
                             <label for="cep">Cep:</label>
-                            <input type="text" class="form-control" id="cep" name="endereco.cep" placeholder="digite o cep" required>
+                            <input type="text" class="form-control" id="cep" th:field="*{endereco.cep}" placeholder="digite o cep" required>
                             <button type="button" class="btn btn-secondary mt-2" onclick="validarCep()">Buscar Endereço</button>
                         </div>
                         <div class="mb-3">
                             <label for="logradouro" class="form-label">Endereço:</label>
-                            <input type="text" class="form-control" id="logradouro" name="endereco.logradouro">
+                            <input type="text" class="form-control" id="logradouro" th:field="*{endereco.logradouro}">
                         </div>
 
                         <div class="mb-3">
                             <label for="bairro" class="form-label">Bairro:</label>
-                            <input type="text" class="form-control" id="bairro" name="endereco.bairro">
+                            <input type="text" class="form-control" id="bairro" th:field="*{endereco.bairro}">
                         </div>
 
                         <div class="mb-3">
                             <label for="localidade" class="form-label">Cidade:</label>
-                            <input type="text" class="form-control" id="localidade" name="endereco.localidade">
+                            <input type="text" class="form-control" id="localidade" th:field="*{endereco.localidade}">
                         </div>
 
                         <div class="mb-3">
                             <label for="uf" class="form-label">UF:</label>
-                            <input type="text" class="form-control" id="uf" name="endereco.uf">
+                            <input type="text" class="form-control" id="uf" th:field="*{endereco.uf}">
                         </div>
                     </div><hr>
 
