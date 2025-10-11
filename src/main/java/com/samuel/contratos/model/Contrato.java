@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "contratos",
+@Table(name = "contrato",
         schema = "public")
 @Data
 public class Contrato {
@@ -60,12 +60,12 @@ public class Contrato {
     private LocalDate data;
 
     @ElementCollection
-    @CollectionTable(name = "contratos_pdf",
+    @CollectionTable(name = "pdfs_contrato",
     joinColumns = @JoinColumn(name = "contrato_id"))
     private List<String> urlPdf;
 
     @ManyToOne
-    @JoinColumn(name = "id_cliente")
+    @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
     @Enumerated(EnumType.STRING)
