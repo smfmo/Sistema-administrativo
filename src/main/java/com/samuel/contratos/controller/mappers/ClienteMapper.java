@@ -2,10 +2,7 @@ package com.samuel.contratos.controller.mappers;
 
 import com.samuel.contratos.controller.dtos.request.ClienteRequestDTO;
 import com.samuel.contratos.model.Cliente;
-import org.mapstruct.BeanMapping;
-import org.mapstruct.Mapper;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.mapstruct.*;
 
 @Mapper(componentModel = "spring")
 public interface ClienteMapper {
