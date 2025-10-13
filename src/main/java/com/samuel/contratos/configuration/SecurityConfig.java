@@ -1,13 +1,13 @@
 package com.samuel.contratos.configuration;
 
-import com.samuel.contratos.repository.UserRepository;
+import com.samuel.contratos.security.CustomUserDetailsService;
+import com.samuel.contratos.service.EmployeeService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -45,12 +45,11 @@ public class SecurityConfig {
         return http.build();
     }
     @Bean
-    public UserDetailsService userDetailsService(UserRepository repository) {
-        return username -> repository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("Usuário no encontrado"));
+    public UserDetailsService userDetailsService(EmployeeService service) {
+        return new CustomUserDetailsService(service);
     }
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(); //criptografia de senha
+        return new BCryptPasswordEncoder();
     }
 }
