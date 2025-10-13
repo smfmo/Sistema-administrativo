@@ -9,12 +9,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class EmployeeService {
 
     private final EmployeeRepository repository;
     private final PasswordEncoder encoder;
 
-    public void criarUsuarioAdmin(String username, String password) {
+    public void createEmployee(String username, String password) {
         if (repository.findByUsername(username).isPresent()){
             return;
         }
