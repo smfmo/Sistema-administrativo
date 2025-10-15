@@ -13,6 +13,10 @@ CREATE TABLE contrato (
     valor_bruto NUMERIC(19, 2) NOT NULL,
     valor_liquido NUMERIC(19, 2) NOT NULL,
     cliente_id uuid,
+    created_by_employee uuid,
+    created_date TIMESTAMP,
+    last_modified_date TIMESTAMP,
+
 
     -- constraints --
     CONSTRAINT fk_contrato_cliente FOREIGN KEY (cliente_id) REFERENCES public.cliente(id),

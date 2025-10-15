@@ -9,6 +9,9 @@ CREATE TABLE cliente (
     numero_identidade VARCHAR(30) NOT NULL,
     orgao_emissor VARCHAR(100) NOT NULL,
     telefone VARCHAR(20) NOT NULL,
+    created_by_employee uuid,
+    created_date TIMESTAMP,
+    last_modified_date TIMESTAMP,
 
     -- Endereço (Embedded) --
     cep VARCHAR(8),
