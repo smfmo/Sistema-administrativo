@@ -3,6 +3,7 @@ package com.samuel.contratos.service;
 import com.samuel.contratos.exception.ArquivoProcessingException;
 import com.samuel.contratos.model.Contrato;
 import com.samuel.contratos.repository.ContratoRepository;
+import com.samuel.contratos.security.SecurityService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,11 +16,14 @@ public class ContratoService {
 
     private final ContratoRepository repository;
     private final ArmazenamentoPdfService pdfService;
+    private final SecurityService securityService;
 
     public ContratoService(ContratoRepository repository,
-                           ArmazenamentoPdfService pdfService) {
+                           ArmazenamentoPdfService pdfService,
+                           SecurityService securityService) {
         this.repository = repository;
         this.pdfService = pdfService;
+        this.securityService = securityService;
     }
 
     @Transactional
@@ -27,6 +31,7 @@ public class ContratoService {
         try {
             List<String> namesPdf = pdfService.receivePdf(pdf);
             contrato.setUrlPdf(namesPdf);
+            contrato.setEmployee(securityService.getEmployeeAuthenticated());
             repository.save(contrato);
         }
         catch (IOException e) {
