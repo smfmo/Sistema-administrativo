@@ -11,7 +11,7 @@ import java.util.UUID;
 @Table(name = "cliente",
         schema = "public")
 @Data
-public class Cliente {
+public class Cliente extends Audit {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -59,6 +59,10 @@ public class Cliente {
     @OneToMany(mappedBy = "cliente")
     @Transient
     private List<Contrato> contratos;
+
+    @ManyToOne
+    @JoinColumn(name = "created_by_employee")
+    private Employee employee;
 
     @Embedded
     private Endereco endereco;

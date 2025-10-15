@@ -4,6 +4,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.samuel.contratos.model.Enum.TiposDeContrato;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -14,7 +18,8 @@ import java.util.UUID;
 @Table(name = "contrato",
         schema = "public")
 @Data
-public class Contrato {
+@EntityListeners(AuditingEntityListener.class)
+public class Contrato extends Audit {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -74,6 +79,10 @@ public class Contrato {
 
     @Column(name = "numero_do_contrato")
     private String numeroDoContrato;
+
+    @ManyToOne
+    @JoinColumn(name = "created_by_employee")
+    private Employee employee;
 
     public Contrato() {}
 }
