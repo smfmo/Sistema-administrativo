@@ -63,15 +63,58 @@
 </nav>
 <div class="container mt-5">
     <div class="card shadow-lg p-4">
-        <h2 class="text-center mb-4">Lista de Clientes</h2> <!-- pesquisa-->
-        <form method="get" action="/clientes/search" class="mb-3">
+        <h2 class="text-center mb-4">Lista de Clientes</h2>
+        <div th:if="${totalPages >= 1}" class="row mt-4">
+            <div class="col-md-12">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center custom-pagination">
+                        <li class="page-item" th:classappend="${atualPage == 0} ? 'disabled'">
+                            <a class="page-link" th:href="@{/clientes/clientsDisplay(nome=${termoPesquisa}, page=${atualPage - 1}, pageSize=${pageSize})}">
+                                &laquo; Anterior
+                            </a>
+                        </li>
+
+                        <li th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+                            class="page-item" th:classappend="${i == atualPage} ? 'active'">
+                            <a class="page-link"
+                            th:href="@{/clientes/clientsDisplay(nome=${termoPesquisa}, page=${i}, pageSize=${pageSize})}"
+                            th:text="${i + 1}"></a>
+                        </li>
+
+                        <li class="page-item" th:classappend="${atualPage >= totalPages - 1} ? 'disabled'">
+                            <a class="page-link"
+                            th:href="@{/clientes/clientsDisplay(nome=${termoPesquisa}, page=${atualPage + 1}, pageSize=${pageSize})}">
+                                Próximo &raquo;
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <div class="text-center mt-2">
+                    <span>Itens por página:</span>
+                    <select class="form-select d-inline-block w-auto custom-pagination-select"
+                    onchange="location.href = this.value">
+                        <option th:each="size : ${sizes}"
+                                th:value="@{/clientes/clientsDisplay(nome=${termoPesquisa}, page=0, pageSize=${size})}"
+                                th:selected="${size == pageSize}"
+                                th:text="${size}">
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <form method="get" th:action="@{/clientes/clientsDisplay}" class="mb-3">
             <div class="input-group">
                 <label for="buscar" class="form-label"></label>
-                <input type="text" id="buscar" name="nome" class="form-control" placeholder="buscar cliente pelo nome">
+                <input type="text" id="buscar" name="nome" class="form-control"
+                       th:value="${termoPesquisa}" placeholder="buscar cliente pelo nome">
                 <button type="submit" class="btn btn-custom">Buscar</button>
             </div>
-
         </form>
+
         <table class="table table-striped">
             <thead>
             <tr>
@@ -83,7 +126,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="cliente : ${listaClientes}">
+            <tr th:each="cliente : ${clientes}">
                 <td th:text="${cliente.nome}"></td>
                 <td th:text="${cliente.telefone}"></td>
                 <td th:text="${cliente.cpf}"></td>
