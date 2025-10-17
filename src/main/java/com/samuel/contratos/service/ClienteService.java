@@ -6,6 +6,9 @@ import com.samuel.contratos.model.Cliente;
 import com.samuel.contratos.repository.ClienteRepository;
 import com.samuel.contratos.security.SecurityService;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
@@ -40,12 +43,18 @@ public class ClienteService {
         repository.save(existingClient);
     }
 
-    public List<Cliente> listarClientes() {
-        return repository.findAll();
+    public Page<Cliente> clientsDisplay(String name, Integer page, Integer pageSize) {
+        Pageable pageRequest = PageRequest.of(page, pageSize);
+        if (name != null && !name.trim().isEmpty()) {
+            return repository.findByNomeContainingIgnoreCase(name, pageRequest);
+        }
+        else {
+            return repository.findAll(pageRequest);
+        }
     }
 
-    public List<Cliente> pesquisarCliente(String nome) {
-        return repository.findByNomeContainingIgnoreCase(nome);
+    public List<Cliente> listarClientes() {
+        return repository.findAll();
     }
 
     public Cliente informacoesCliente(UUID id) {
