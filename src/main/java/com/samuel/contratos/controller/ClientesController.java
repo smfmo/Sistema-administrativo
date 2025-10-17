@@ -6,6 +6,7 @@ import com.samuel.contratos.model.Cliente;
 import com.samuel.contratos.service.ClienteService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -48,17 +49,22 @@ public class ClientesController {
         return "/Atualizar-cliente";
     }
 
-    @GetMapping("/list")
-    public String listarClientes() {
-        return "Controle-de-clientes";
-    }
+    @GetMapping("/clientsDisplay")
+    public String clientsDisplay(@RequestParam(defaultValue = "0") Integer page,
+                                 @RequestParam(defaultValue = "10") Integer pageSize,
+                                 @RequestParam(name = "nome", required = false) String name,
+                                 Model model) {
+        Page<Cliente> clients = service.clientsDisplay(name, page, pageSize);
 
-    @GetMapping("/search")
-    public String pesquisarCliente(@RequestParam(name = "nome", required = false) String nome,
-                                   Model model) {
+        Integer max = clients.getTotalPages();
+        List<Integer> sizes = List.of(5, 10, 15);
 
-        List<Cliente> resultado = service.pesquisarCliente(nome);
-        model.addAttribute("clientes", resultado);
+        model.addAttribute("atualPage", page);
+        model.addAttribute("clientes", clients.getContent());
+        model.addAttribute("termoPesquisa", name);
+        model.addAttribute("totalPages", max);
+        model.addAttribute("sizes", sizes);
+        model.addAttribute("pageSize", pageSize);
 
         return "Controle-de-clientes";
     }
